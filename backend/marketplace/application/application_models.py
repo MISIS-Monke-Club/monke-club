@@ -1,5 +1,4 @@
 from django.db import models
-from marketplace.models import Subject, Service
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -24,8 +23,8 @@ class Application(models.Model):
         default="Заявка без названия", blank=False, verbose_name="Название заявки"
     )
 
-    subject_id = models.ManyToManyField(Subject, verbose_name="Теги/тег предмета")
-    service_id = models.ManyToManyField(Service, verbose_name="Теги типа задачи")
+    subjects = models.ManyToManyField("marketplace.service", verbose_name="Теги/тег предмета",blank=True)
+    services = models.ManyToManyField("marketplace.subject", verbose_name="Теги типа задачи",blank=True)
 
     date_of_creation = models.DateField(
         verbose_name="Дата создания заявки", default=timezone.now, null=True
