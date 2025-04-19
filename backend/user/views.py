@@ -175,7 +175,6 @@ class CreateBobritoBandito(APIView):
                     "id": user.id,
                     "username": user.username,
                     "email": user.email,
-                    "slug": user.username,
                     **bio_data,
                 }
             )

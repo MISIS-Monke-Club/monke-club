@@ -1,8 +1,20 @@
-from django.shortcuts import render
-from rest_framework import viewsets, mixins
-from rest_framework.viewsets import GenericViewSet
+from .models import Subject, Service
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import ServiceSerializer, SubjectSerializer
 
-from marketplace.models import Service
 
-from backend.marketplace.serializers import ServiceSerializer
+class BombiniGusiniSubject(APIView):
+    def get(self, request):
+        subject = Subject.objects.all()
+        serializer = SubjectSerializer(subject, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class BombiniGusiniService(APIView):
+    def get(self, request):
+        service = Service.objects.all()
+        serializer = ServiceSerializer(service, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 

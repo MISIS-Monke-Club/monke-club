@@ -1,3 +1,4 @@
+
 from rest_framework import viewsets, filters, permissions
 from django.db.models import F
 
@@ -22,6 +23,7 @@ class MentorViewSet(viewsets.ModelViewSet):
     filterset_class = MentorFilters
     ordering_fields = ["count_successful_transactions", "rating"]
     ordering = ['-count_successful_transactions']
+
     ordering_labels = {
         "count_successful_transactions": "Успешных сделок (по возрастанию)",
         "-count_successful_transactions": "Успешных сделок (по убыванию)",
@@ -35,10 +37,10 @@ class MentorViewSet(viewsets.ModelViewSet):
         )
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return GetListMentorSerializer
 
-        elif self.action == 'retrieve':
+        elif self.action == "retrieve":
             return GetDetailMentorSerializer
         else:
             return MentorCreateSerializer
@@ -59,7 +61,3 @@ class MentorViewSet(viewsets.ModelViewSet):
             result.append({"value": index, "label": data})
 
         return Response(result)
-
-
-
-
