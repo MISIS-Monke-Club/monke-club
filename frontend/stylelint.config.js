@@ -36,6 +36,7 @@ export default {
                     "flex",
                     "grid",
                     "background",
+                    "flex-flow",
                 ],
             },
         ],
