@@ -1,8 +1,10 @@
-import { createBrowserRouter } from "react-router-dom"
-import { LoginPage } from "@pages/login"
+import { createBrowserRouter, Link, Outlet } from "react-router-dom"
 import { Layout } from "../layout"
 import { AuthProvider } from "../providers/auth-provider"
+import { LoginPage } from "@pages/login"
 import { Homepage } from "@pages/home-page"
+import { MentorsPage } from "@pages/mentors/mentors"
+import { MentorPage } from "@pages/mentor-page/mentor-page"
 
 export const router = createBrowserRouter(
     [
@@ -27,9 +29,27 @@ export const router = createBrowserRouter(
                         {
                             path: "marketplace",
                             element: (
-                                <div>welcome to the marketplace service!</div>
+                                <div>
+                                    <Link to='mentors'>Mentors</Link>welcome to
+                                    the marketplace service!
+                                    <Outlet />
+                                </div>
                             ),
-                            children: [],
+                            errorElement: (
+                                <div>
+                                    Что-то пошло не так в сервисе маркетплейса(
+                                </div>
+                            ),
+                            children: [
+                                {
+                                    path: "mentors",
+                                    element: <MentorsPage />,
+                                },
+                                {
+                                    path: "mentors/:mentorId",
+                                    element: <MentorPage />,
+                                },
+                            ],
                         },
                         {
                             path: "share-items",
