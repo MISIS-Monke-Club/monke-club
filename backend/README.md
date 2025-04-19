@@ -63,6 +63,11 @@ services - лаба курсач и тд
 subjects - предметы 
 count_successful_transactions - количество выполненных заказов
 
+null:
+photo,
+services,
+subjects,
+
 `/marketplace/mentors/?ordering=-count_successful_transactions`
 можно делать сортировку
 ***
@@ -86,6 +91,8 @@ count_successful_transactions - количество выполненных за
 
 value - Что вставлять в ordering
 label - название
+
+
 ***
 
 ## GET /marketplace/mentors/<str: username>/
@@ -121,7 +128,8 @@ label - название
     "rating": int,
     "social_network: [
     {
-        "name": "text"
+        "name": str
+         "text": str
     }
     ]
     
@@ -130,6 +138,11 @@ label - название
 ```
 Пояснения к полям
 все тоже самое только добавляется description
+
+null:
+photo,
+services,
+subjects,
 ***
 
 

@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     "marketplace",
     "marketplace.mentors",
     "django.contrib.postgres",
-    "config",
-    "rest_framework",
     "rest_framework_simplejwt",
     "auth_app",
     "user",
