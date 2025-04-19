@@ -28,7 +28,7 @@ class Application(models.Model):
     service_id = models.ManyToManyField(Service, verbose_name="Теги типа задачи")
 
     date_of_creation = models.DateField(
-        verbose_name="Дата создания заявки", default=timezone.now
+        verbose_name="Дата создания заявки", default=timezone.now, null=True
     )
     description = models.CharField(
         default="", blank=True, verbose_name="Описание заявки"

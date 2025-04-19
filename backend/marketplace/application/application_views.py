@@ -24,7 +24,7 @@ class ApplicationRUDView(
 ):
     queryset = Application.objects.all()
     serializer_class = ApplicationsSerializer
-    lookup_field = "pk"
+    lookup_field = "username"
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

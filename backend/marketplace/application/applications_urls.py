@@ -6,5 +6,5 @@ from .application_views import (
 
 urlpatterns = [
     path("", Alcv.as_view(), name="application-list-create"),
-    path("<int:pk>/", Arud.as_view(), name="application-detail"),
+    path("<str:username>/", Arud.as_view(), name="application-detail"),
 ]

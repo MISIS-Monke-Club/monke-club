@@ -11,4 +11,5 @@ class ApplicationsSerializer(serializers.ModelSerializer):
 class ApplicationListSerialier(serializers.ModelSerializer):
     class Meta:
         model = Application
+        #fields = ['name','year','subject_id','service_id','date_of_creation','price']
         fields = "__all__"
