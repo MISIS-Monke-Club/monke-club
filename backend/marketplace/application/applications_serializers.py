@@ -35,10 +35,11 @@ class ApplicationCreateSerializer(serializers.ModelSerializer):
 class ApplicationListSerializer(serializers.ModelSerializer):
     services = SubjectSerializer(many=True, read_only=True)
     subjects = ServiceSerializer(many=True, read_only=True)
+    username = serializers.ReadOnlyField(source="user.username")
     extra_kwargs = {
             'slug': {'read_only': True}
         }
 
     class Meta:
         model = Application
-        fields = ["name", "year", "subjects", "services", "date_of_creation", "price"]
+        fields = ["name","username", "year", "subjects", "services", "date_of_creation", "price"]
