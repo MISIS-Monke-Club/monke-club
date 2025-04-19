@@ -283,7 +283,7 @@ photo,
 services,
 subjects,
 ***
-
+```
 
 ## GET /marketplace/services/
 Массив всех сервисов
