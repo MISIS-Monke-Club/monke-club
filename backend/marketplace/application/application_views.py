@@ -8,6 +8,8 @@ from .applications_serializers import (
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters as filters
 from .application_filters import ApplicationFilter
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 class ApplicationListCreateView(
@@ -52,3 +54,26 @@ class ApplicationRUDView(
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+class ApplicationFilterFieldsView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "fields": {
+                "subjects": "Предметы",
+                "services": "Тип задачи",
+                "year": "Курс",
+                "is_free": "Бесплатно"
+            }
+        })
+
+
+class ApplicationOrderingFieldsView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        return Response({
+            "ordering_fields": [
+                "date_of_creation",
+                "price"
+            ]
+        })

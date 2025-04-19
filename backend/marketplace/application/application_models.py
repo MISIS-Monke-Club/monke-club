@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from unidecode import unidecode
 
 
 class Application(models.Model):
@@ -61,8 +62,7 @@ class Application(models.Model):
     year = models.IntegerField(choices=YEAR_CHOICES, default=1, verbose_name="Курс")
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(unidecode(self.name))
         super().save()
 
     def __str__(self):
