@@ -1,3 +1,4 @@
+import { sessionSlice } from "@entities/session"
 import { combineSlices } from "@reduxjs/toolkit"
 
-export const reducer = combineSlices()
+export const reducer = combineSlices(sessionSlice)
