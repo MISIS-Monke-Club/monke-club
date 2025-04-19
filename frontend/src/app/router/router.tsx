@@ -6,6 +6,7 @@ import { Homepage } from "@pages/home-page"
 import { MentorsPage } from "@pages/mentors/mentors"
 import { MentorPage } from "@pages/mentor-page/mentor-page"
 import { RequestsPage } from "@pages/requests-page"
+import { RequestDetail } from "@pages/detailed-request-page"
 
 export const router = createBrowserRouter(
     [
@@ -55,6 +56,10 @@ export const router = createBrowserRouter(
                         {
                             path: "request",
                             element: <RequestsPage />,
+                        },
+                        {
+                            path: "request/:slug",
+                            element: <RequestDetail />,
                         },
                         {
                             path: "share-items",

@@ -18,6 +18,7 @@ export const requestDTOschema = z.object({
     ),
     date_of_creation: z.string().nullable(),
     price: z.string().nullable(),
+    slug: z.string(),
 })
 
 export const requestListDTOschema = z.array(requestDTOschema)
@@ -32,6 +33,7 @@ export type RequestModel = {
     services: string[]
     createdAt: Date | null
     price: number | null
+    slug: string
 }
 
 export function fromRequestDTO(dto: RequestDTO): RequestModel {
@@ -43,5 +45,6 @@ export function fromRequestDTO(dto: RequestDTO): RequestModel {
         services: dto.services.map((s) => s.name),
         createdAt: dto.date_of_creation ? new Date(dto.date_of_creation) : null,
         price: dto.price ? parseFloat(dto.price) : null,
+        slug: dto.slug,
     }
 }
