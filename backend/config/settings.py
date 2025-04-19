@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
+
 
 load_dotenv(override=False)
 
@@ -32,6 +34,8 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,8 +43,22 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_filters",
     "marketplace",
+    "marketplace.mentors",
+    "django.contrib.postgres",
+    "rest_framework_simplejwt",
+    "auth_app",
+    "user",
 ]
+
+SIMPLE_JWT = {
+    "SIGNING_KEY": SECRET_KEY,
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -134,3 +152,23 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Lezgian Admin",
+    "site_header": "Lezgian Website Admin",
+    "site_brand": "Lezgian",
+    "welcome_sign": "Добро пожаловать!",
+    "copyright": "Lezgian Development",
+    "search_model": ["auth.User", "yourapp.YourModel"],  # если хочешь поиск
+    # Темы
+    "theme": "cyborg",  # 👈 тёмная тема (или "flatly", "darkly", "lux" и др.)
+    # Sidebar
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth.User": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        # Добавь иконки для своих моделей
+    },
+}
