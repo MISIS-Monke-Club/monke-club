@@ -13,6 +13,9 @@ from rest_framework.response import Response
 from user.mixins import IsOwnerMixin
 from marketplace.mentors.filters import *
 
+from user.models import UserBio
+
+from marketplace.models import Subject, Service
 
 
 class MentorViewSet(viewsets.ModelViewSet):
@@ -60,6 +63,17 @@ class MentorViewSet(viewsets.ModelViewSet):
 
         return Response(result)
 
+    @action(detail=False, methods=["get"], url_path="filters")
+    def get_filter_fields(self, request):
+        result = []
+        courses = UserBio.objects.values_list("course", flat=True).distinct().order_by("course")
+        subjects = Subject.objects.values("name").distinct()
+        services = Service.objects.values("name").distinct()
+        return Response({
+            "courses": list(courses),
+            "subjects": [{"value": s["name"], "label": s["name"].capitalize()} for s in subjects],
+            "services": [{"value": s["name"], "label": s["name"].capitalize()} for s in services],
+        })
 
 
 
