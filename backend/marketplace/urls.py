@@ -6,5 +6,4 @@ urlpatterns = [
     path("applications/", include("marketplace.application.applications_urls")),
     re_path(r"^services/$", BombiniGusiniService.as_view(), name="service-list"),
     re_path(r"^subjects/$", BombiniGusiniSubject.as_view(), name="subject-list"),
-    
 ]

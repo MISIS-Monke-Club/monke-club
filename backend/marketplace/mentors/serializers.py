@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from marketplace.mentors.models import Mentor
@@ -72,11 +71,13 @@ class GetDetailMentorSerializer(serializers.ModelSerializer):
         return (obj.user.first_name + " " + obj.user.last_name).strip()
 
 
-
-
 class MentorCreateSerializer(serializers.ModelSerializer):
-    services = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all(), many=True, required=False)
-    subjects = serializers.PrimaryKeyRelatedField(queryset=Subject.objects.all(), many=True, required=False)
+    services = serializers.PrimaryKeyRelatedField(
+        queryset=Service.objects.all(), many=True, required=False
+    )
+    subjects = serializers.PrimaryKeyRelatedField(
+        queryset=Subject.objects.all(), many=True, required=False
+    )
 
     class Meta:
         model = Mentor
@@ -84,7 +85,7 @@ class MentorCreateSerializer(serializers.ModelSerializer):
             "services",
             "subjects",
             "description",
-            "count_successful_transactions"
+            "count_successful_transactions",
         )
 
     def create(self, validated_data):

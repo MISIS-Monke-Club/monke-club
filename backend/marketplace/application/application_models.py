@@ -25,8 +25,12 @@ class Application(models.Model):
     )
     slug = models.SlugField(verbose_name="Символьный код", blank=True, unique=True)
 
-    subjects = models.ManyToManyField("marketplace.service", verbose_name="Теги/тег предмета",blank=True)
-    services = models.ManyToManyField("marketplace.subject", verbose_name="Теги типа задачи",blank=True)
+    subjects = models.ManyToManyField(
+        "marketplace.service", verbose_name="Теги/тег предмета", blank=True
+    )
+    services = models.ManyToManyField(
+        "marketplace.subject", verbose_name="Теги типа задачи", blank=True
+    )
 
     date_of_creation = models.DateField(
         verbose_name="Дата создания заявки", default=timezone.now, null=True

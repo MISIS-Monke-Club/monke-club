@@ -5,12 +5,19 @@ from .applications_serializers import (
     ApplicationListSerializer,
     ApplicationCreateSerializer,
 )
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters as filters
+from .application_filters import ApplicationFilter
 
 
 class ApplicationListCreateView(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
 ):
-    queryset = Application.objects.all()
+    queryset = Application.objects.all().prefetch_related("subjects", "services")
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    filterset_class = ApplicationFilter
+    ordering_fields = ["date_of_creation", "price"]
+    ordering = ["-date_of_creation"]
 
     def get_serializer_class(self):
         if self.request.method == "POST":
