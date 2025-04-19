@@ -36,3 +36,4 @@ uritemplate==4.1.1
 virtualenv==20.30.0
 django-jazzmin>=2.6.0
 django-filter
+django-cors-headers>=4.7.0

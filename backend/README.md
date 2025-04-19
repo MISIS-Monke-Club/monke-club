@@ -281,6 +281,72 @@ services,
 subjects,
 ***
 
+## POST api/marketplace/mentors/
+все сортировки у менторов списка
+
+Структура запроса
+```json
+{
+  "services": [2, 1],
+  "subjects": [1],
+  "description": "Ментор ssss математике и физике",
+  "count_successful_transactions": 0
+}
+```
+
+Структура ответа
+```
+{
+    "services": [
+        1,
+        2
+    ],
+    "subjects": [
+        1
+    ],
+    "description": "Ментор ssss математике и физике",
+    "count_successful_transactions": 0
+}
+```
+***
+
+## PUT api/marketplace/mentors/<str: username>
+все сортировки у менторов списка
+
+Структура запроса
+```json
+{
+  "services": [2, 1],
+  "subjects": [1],
+  "description": "Ментор ssss математике и физике",
+  "count_successful_transactions": 0
+}
+```
+
+Структура ответа
+```
+{
+    "services": [
+        1,
+        2
+    ],
+    "subjects": [
+        1
+    ],
+    "description": "Ментор ssss математике и физике",
+    "count_successful_transactions": 0
+}
+```
+***
+
+
+
+
+
+
+
+
+
 
 ## GET /marketplace/services/
 Массив всех сервисов

@@ -17,3 +17,4 @@ class BombiniGusiniService(APIView):
         service = Service.objects.all()
         serializer = ServiceSerializer(service, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
