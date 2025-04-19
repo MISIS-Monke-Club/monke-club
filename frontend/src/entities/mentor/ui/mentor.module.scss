@@ -1,0 +1,44 @@
+.mentorCard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    width: 100%;
+    padding: 20px 16px;
+    border-radius: 20px;
+
+    background-color: var(--color-background-alt);
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+
+    width: 100px;
+
+    .image {
+        border-radius: 28px;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
