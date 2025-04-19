@@ -24,6 +24,7 @@ class BioInline(admin.StackedInline):
 # Снимаем регистрацию стандартного UserAdmin
 admin.site.unregister(User)
 
+
 # Регистрируем своего
 @admin.register(User)
 class CustomUserAdmin(DefaultUserAdmin):

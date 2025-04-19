@@ -11,7 +11,7 @@
         "lint": "npx eslint ./src && npx stylelint './src/**/*.scss'",
         "lint:auto-fix": "npx eslint ./src --fix && npx stylelint './src/**/*.scss' --fix",
         "lint:format": "npx prettier ./src --write",
-        "prepare": "cd .. && husky ./tg-frontend/.husky || true",
+        "prepare": "cd .. && husky ./frontend/.husky || true",
         "type-check": "tsc --noEmit --pretty --skipLibCheck -p tsconfig.json"
     },
     "dependencies": {
@@ -28,7 +28,6 @@
         "react-redux": "^9.2.0",
         "react-router-dom": "^6.26.2",
         "sonner": "^2.0.1",
-        "stylelint-config-standard": "^38.0.0",
         "vite": "^6.2.4",
         "zod": "^3.24.1"
     },
@@ -52,6 +51,7 @@
         "scss": "^0.2.4",
         "stylelint": "^16.18.0",
         "stylelint-config-clean-order": "^7.0.0",
+        "stylelint-config-standard": "^38.0.0",
         "stylelint-config-standard-scss": "^14.0.0",
         "typescript": "^5.8.2",
         "typescript-eslint": "^8.13.0",
