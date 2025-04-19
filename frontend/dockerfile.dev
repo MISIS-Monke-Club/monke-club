@@ -3,12 +3,12 @@ ARG MODE=development
 
 ENV NODE_ENV=$MODE
 
-WORKDIR /tg-frontend
+WORKDIR /frontend
 COPY package*.json ./
 
 RUN npm install
 
-COPY . /tg-frontend/
+COPY . /frontend/
 
 EXPOSE 8080
 
