@@ -541,3 +541,85 @@ subjects,
 }
 ```
 204 - все ок
+
+
+## GET /api/v1/vacancies/
+Тип ответа
+```
+ {
+        "title": "аываыв",
+        "price": null,
+        "work_type": {
+            "title": "еуые"
+        },
+        "job_experience": null
+    },
+    {
+        "title": "тест",
+        "price": null,
+        "work_type": {
+            "title": "еуые"
+        },
+        "job_experience": null
+    }
+```
+work_type - тип работы (удаленка, ...)
+job_experience - опыт работы
+все может быть null кроме title description
+
+
+## GET /api/v1/vacancies/<slug:slug>/
+Тип ответа
+```
+ {
+    "title": "тест",
+    "description": "авыа",
+    "stack": [
+        {
+            "title": "test"
+        },
+        {
+            "title": "tewst3"
+        }
+    ],
+    "data_created": "21:46 19 Apr 2025",
+    "data_end": null,
+    "schedule": null,
+    "work_space": null,
+    "price": null,
+    "work_type": {
+        "title": "еуые"
+    },
+    "job_experience": null
+}
+```
+
+## POSR /api/v1/vacancies/<slug:slug>/
+Тип ответа
+```
+ {
+    "title": "fffff",
+    "description": "21312312",
+    "stack": [
+        1
+    ],
+    "data_created": "22:22 19 Apr 2025",
+    "data_end": null,
+    "schedule": null,
+    "work_space": null,
+    "price": null,
+    "work_type": 3,
+    "job_experience": null
+}
+
+```
+
+Тип запроса
+```json
+{
+ "title": "fffff",
+ "description": "21312312",
+ "stack": [1],
+ "work_type": 3
+}
+```
