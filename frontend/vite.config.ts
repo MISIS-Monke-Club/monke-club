@@ -3,9 +3,19 @@ import path from "path"
 
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
+import dotenv from "dotenv"
+import { z } from "zod"
+
+const envSchema = z.object({
+    VITE_BACKEND_URL: z.string().min(1),
+})
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
+    dotenv.config({ override: false })
+
+    envSchema.parse(process.env)
+
     return {
         plugins: [react()],
         resolve: {
