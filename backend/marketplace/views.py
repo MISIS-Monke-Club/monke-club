@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from .models import Subject, Service
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import ServiceSerializer, SubjectSerializer
 
-# Create your views here.
+
+class BombiniGusiniSubject(APIView):
+    def get(self, request):
+        subject = Subject.objects.all()
+        serializer = SubjectSerializer(subject, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class BombiniGusiniService(APIView):
+    def get(self, request):
+        service = Service.objects.all()
+        serializer = ServiceSerializer(service, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
