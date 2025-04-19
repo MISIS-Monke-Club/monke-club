@@ -66,7 +66,7 @@ class MentorViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["get"], url_path="filters")
     def get_filter_fields(self, request):
         result = GeFiltersEndpoint().get_filters()
-        return result
+        return Response(result)
 
 
 
