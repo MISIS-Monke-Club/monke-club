@@ -1,4 +1,4 @@
-from rest_framework import viewsets,filters
+from rest_framework import viewsets, filters
 
 from marketplace.mentors.models import Mentor
 
@@ -11,20 +11,20 @@ from rest_framework.response import Response
 
 class MentorViewSet(viewsets.ModelViewSet):
     queryset = Mentor.objects.all()
-    lookup_field = 'user__username'
+    lookup_field = "user__username"
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = ["count_successful_transactions"]
-    ordering = ['-count_successful_transactions']
+    ordering = ["-count_successful_transactions"]
     ordering_labels = {
         "count_successful_transactions": "Успешных сделок (по возрастанию)",
         "-count_successful_transactions": "Успешных сделок (по убыванию)",
     }
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return GetListMentorSerializer
 
-        elif self.action == 'retrieve':
+        elif self.action == "retrieve":
             return GetDetailMentorSerializer
         else:
             return GetListMentorSerializer
@@ -36,7 +36,3 @@ class MentorViewSet(viewsets.ModelViewSet):
             result.append({"value": index, "label": data})
 
         return Response(result)
-
-
-
-

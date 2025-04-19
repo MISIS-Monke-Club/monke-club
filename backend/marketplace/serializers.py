@@ -1,7 +1,5 @@
 from rest_framework import serializers
-
 from marketplace.models import Service
-
 from marketplace.models import Subject
 
 
