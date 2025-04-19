@@ -11,9 +11,6 @@ from marketplace.serializers import ServiceSerializer, SubjectSerializer
 from user.serializers import SocialNetworkUserSerializer
 
 
-# rating
-# photo
-
 
 class GetListMentorSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source="user.username")
