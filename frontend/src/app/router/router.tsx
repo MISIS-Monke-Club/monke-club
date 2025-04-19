@@ -3,6 +3,7 @@ import { LoginPage } from "@pages/login"
 import { Layout } from "../layout"
 import { AuthProvider } from "../providers/auth-provider"
 import { Homepage } from "@pages/home-page"
+import { MentorsPage } from "@pages/mentors/mentors"
 
 export const router = createBrowserRouter(
     [
@@ -29,7 +30,21 @@ export const router = createBrowserRouter(
                             element: (
                                 <div>welcome to the marketplace service!</div>
                             ),
-                            children: [],
+                            errorElement: (
+                                <div>
+                                    Что-то пошло не так в сервисе маркетплейса(
+                                </div>
+                            ),
+                            children: [
+                                {
+                                    path: "mentors",
+                                    element: <MentorsPage />,
+                                },
+                                {
+                                    path: "mentors/:mentorId",
+                                    element: <MentorsPage />,
+                                },
+                            ],
                         },
                         {
                             path: "share-items",
