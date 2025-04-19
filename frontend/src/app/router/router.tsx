@@ -5,6 +5,7 @@ import { LoginPage } from "@pages/login"
 import { Homepage } from "@pages/home-page"
 import { MentorsPage } from "@pages/mentors/mentors"
 import { MentorPage } from "@pages/mentor-page/mentor-page"
+import { RequestsPage } from "@pages/requests-page"
 
 export const router = createBrowserRouter(
     [
@@ -48,6 +49,10 @@ export const router = createBrowserRouter(
                                 {
                                     path: "mentors/:mentorId",
                                     element: <MentorPage />,
+                                },
+                                {
+                                    path: "/request",
+                                    element: <RequestsPage />,
                                 },
                             ],
                         },

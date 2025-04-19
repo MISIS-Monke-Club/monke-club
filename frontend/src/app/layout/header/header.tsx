@@ -15,6 +15,7 @@ export function Header() {
             <nav>
                 <Link to='/'>Homepage</Link>
                 <Link to='marketplace'>Marketplace</Link>
+                <Link to='request'>Заявки</Link>
             </nav>
             <div className={classes.actions}></div>
         </header>
