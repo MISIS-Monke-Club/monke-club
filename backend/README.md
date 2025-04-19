@@ -10,7 +10,7 @@ API для управления заявками (Application) пользова�
 
 ## 🔧 1. Создание заявки
 
-**Endpoint:** `POST /api/applications/`  
+**Endpoint:** `POST http://localhost:3000/api/applications/`  
 **Описание:** Создание новой заявки.
 
 ### 🔹 Пример запроса
@@ -30,7 +30,7 @@ API для управления заявками (Application) пользова�
 
 📋 2. Получение списка заявок
 
-Endpoint: GET /api/applications/
+Endpoint: `GET http://localhost:3000/api/applications/`
 Описание: Получение всех заявок текущего пользователя.
 
 🔹 Пример ответа
@@ -58,7 +58,7 @@ Endpoint: GET /api/applications/
 
 ✏️ 3. Обновление заявки
 
-Endpoint: PUT/PATCH /api/applications/{username}/
+Endpoint: PUT/PATCH http://localhost:3000/api/applications/{slug}/
 Описание: Полное или частичное обновление заявки.
 
 🔹 Проблемный пример
@@ -77,7 +77,7 @@ Endpoint: PUT/PATCH /api/applications/{username}/
 
 🗑️ 4. Удаление заявки
 
-Endpoint: DELETE /api/applications/{username}/
+Endpoint: DELETE http://localhost:3000/api/applications/{slug}/
 Описание: Удаление существующей заявки.
 
 Тело запроса: не требуется.

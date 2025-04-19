@@ -1,17 +1,19 @@
 from rest_framework import mixins, generics
 from .application_models import Application
-from .applications_serializers import ApplicationsSerializer, ApplicationListSerializer , ApplicationCreateSerializer
+from .applications_serializers import (
+    ApplicationsSerializer,
+    ApplicationListSerializer,
+    ApplicationCreateSerializer,
+)
 
 
 class ApplicationListCreateView(
-    mixins.ListModelMixin, 
-    mixins.CreateModelMixin, 
-    generics.GenericAPIView
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
 ):
     queryset = Application.objects.all()
-    
+
     def get_serializer_class(self):
-        if self.request.method == 'POST':
+        if self.request.method == "POST":
             return ApplicationCreateSerializer
         return ApplicationListSerializer
 
@@ -22,7 +24,6 @@ class ApplicationListCreateView(
         return self.create(request, *args, **kwargs)
 
 
-
 class ApplicationRUDView(
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
@@ -31,7 +32,7 @@ class ApplicationRUDView(
 ):
     queryset = Application.objects.all()
     serializer_class = ApplicationsSerializer
-    lookup_field = "user"
+    lookup_field = "slug"
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 class Application(models.Model):
@@ -22,6 +23,7 @@ class Application(models.Model):
     name = models.CharField(
         default="Заявка без названия", blank=False, verbose_name="Название заявки"
     )
+    slug = models.SlugField(verbose_name="Символьный код", blank=True, unique=True)
 
     subjects = models.ManyToManyField("marketplace.service", verbose_name="Теги/тег предмета",blank=True)
     services = models.ManyToManyField("marketplace.subject", verbose_name="Теги типа задачи",blank=True)
@@ -53,6 +55,11 @@ class Application(models.Model):
     )
 
     year = models.IntegerField(choices=YEAR_CHOICES, default=1, verbose_name="Курс")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save()
 
     def __str__(self):
         return f"{self.name}"
