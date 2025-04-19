@@ -11,7 +11,7 @@
         "lint": "npx eslint ./src && npx stylelint './src/**/*.scss'",
         "lint:auto-fix": "npx eslint ./src --fix && npx stylelint './src/**/*.scss' --fix",
         "lint:format": "npx prettier ./src --write",
-        "prepare": "cd .. && husky ./tg-frontend/.husky || true",
+        "prepare": "cd .. && husky ./frontend/.husky || true",
         "type-check": "tsc --noEmit --pretty --skipLibCheck -p tsconfig.json"
     },
     "dependencies": {
