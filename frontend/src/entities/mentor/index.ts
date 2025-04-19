@@ -1,4 +1,4 @@
-export type { MentorModel } from "./model"
+export type { MentorModel, MentorId } from "./model"
 export { mentorDTOschema } from "./model"
 export { api as mentorApi } from "./api"
 export { fromMentorDTO, fromMentorArrayDTO } from "./lib/from-dto"

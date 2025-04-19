@@ -29,3 +29,5 @@ export type MentorModel = {
     photo: string
     rating: number
 }
+
+export type MentorId = Pick<MentorModel, "username">

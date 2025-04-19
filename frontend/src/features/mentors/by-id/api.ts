@@ -1,19 +1,16 @@
 import { queryOptions } from "@tanstack/react-query"
-import {
-    fromMentorArrayDTO,
-    mentorApi,
-    mentorDTOschema,
-} from "@entities/mentor"
+import { fromMentorDTO, mentorApi, mentorDTOschema } from "@entities/mentor"
 import { typedQuery } from "@shared/lib/precooked-methods"
 import { instance } from "@shared/api"
+import { MentorId } from "@entities/mentor"
 
-export const getMentorById = ({ mentorId }: { mentorId: number }) =>
+export const getMentorById = ({ username }: MentorId) =>
     queryOptions({
         queryKey: [...mentorApi.baseUrl, "ById"],
         queryFn: () =>
             typedQuery({
-                request: instance.get(`${mentorApi.baseUrl}/${mentorId}`),
-                dtoSchema: mentorDTOschema.array(),
-                fromDTO: fromMentorArrayDTO,
+                request: instance.get(`${mentorApi.baseUrl}/${username}`),
+                dtoSchema: mentorDTOschema,
+                fromDTO: fromMentorDTO,
             }),
     })

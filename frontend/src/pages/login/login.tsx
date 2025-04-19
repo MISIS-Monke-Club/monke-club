@@ -1,10 +1,10 @@
+import { FormEvent, useCallback } from "react"
+import { z } from "zod"
+import { toast } from "sonner"
+import classes from "./login.module.scss"
 import { useLogin } from "@features/auth"
 import { Button } from "@shared/ui/button/ui"
 import { Input } from "@shared/ui/input"
-import { FormEvent, useCallback } from "react"
-import classes from "./login.module.scss"
-import { z } from "zod"
-import { toast } from "sonner"
 
 const loginPageParamsSchema = z.object({
     login: z.string().min(1),

@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
-import { LoginPage } from "@pages/login"
 import { Layout } from "../layout"
 import { AuthProvider } from "../providers/auth-provider"
+import { LoginPage } from "@pages/login"
 import { Homepage } from "@pages/home-page"
 import { MentorsPage } from "@pages/mentors/mentors"
+import { MentorPage } from "@pages/mentor-page/mentor-page"
 
 export const router = createBrowserRouter(
     [
@@ -42,7 +43,7 @@ export const router = createBrowserRouter(
                                 },
                                 {
                                     path: "mentors/:mentorId",
-                                    element: <MentorsPage />,
+                                    element: <MentorPage />,
                                 },
                             ],
                         },
