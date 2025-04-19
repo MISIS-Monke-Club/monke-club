@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "auth_app",
     "user",
+    "vacancies"
 ]
 
 SIMPLE_JWT = {
@@ -62,6 +63,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -178,3 +180,6 @@ JAZZMIN_SETTINGS = {
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 
+
+import locale
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
