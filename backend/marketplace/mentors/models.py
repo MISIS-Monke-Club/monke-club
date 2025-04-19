@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-
 class Mentor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     services = models.ManyToManyField("marketplace.service", blank=True)
@@ -12,4 +11,3 @@ class Mentor(models.Model):
 
     def __str__(self):
         return self.user.username
-

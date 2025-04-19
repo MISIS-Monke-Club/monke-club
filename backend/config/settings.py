@@ -33,7 +33,7 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    "jazzmin",
     "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_filters',
-  
+    "django_filters",
     "marketplace",
     "marketplace.mentors",
     "django.contrib.postgres",
@@ -153,10 +152,8 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Добро пожаловать!",
     "copyright": "Lezgian Development",
     "search_model": ["auth.User", "yourapp.YourModel"],  # если хочешь поиск
-
     # Темы
     "theme": "cyborg",  # 👈 тёмная тема (или "flatly", "darkly", "lux" и др.)
-
     # Sidebar
     "show_sidebar": True,
     "navigation_expanded": True,

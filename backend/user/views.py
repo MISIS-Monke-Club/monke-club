@@ -34,6 +34,11 @@ class BobritoBanditoDetail(APIView):
             return Response({"detail": "Пользователь не найден."}, status=404)
 
     def put(self, request, username):
+        if request.user.username != username:
+            return Response(
+                {"detail": "У вас нет прав доступа к этим данным."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
         try:
             user = User.objects.get(username=username)
             new_username = request.data.get("username", user.username)
@@ -69,6 +74,12 @@ class BobritoBanditoDetail(APIView):
             )
 
     def patch(self, request, username):
+        if request.user.username != username:
+            return Response(
+                {"detail": "У вас нет прав доступа к этим данным."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
         try:
             user = User.objects.get(username=username)
             new_username = request.data.get("username")
@@ -110,6 +121,11 @@ class BobritoBanditoDetail(APIView):
             )
 
     def delete(self, request, username):
+        if request.user.username != username:
+            return Response(
+                {"detail": "У вас нет прав доступа к этим данным."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
         try:
             user = User.objects.get(username=username)
             user.delete()
