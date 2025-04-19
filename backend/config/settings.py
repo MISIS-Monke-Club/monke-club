@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
+
 load_dotenv(override=False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +30,6 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +39,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
+    "config",
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "auth_app",
 ]
+
+SIMPLE_JWT = {
+    "SIGNING_KEY": SECRET_KEY,
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
