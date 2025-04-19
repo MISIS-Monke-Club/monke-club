@@ -1,19 +1,26 @@
 from rest_framework import mixins, generics
 from .application_models import Application
-from .applications_serializers import ApplicationsSerializer, ApplicationListSerialier
+from .applications_serializers import ApplicationsSerializer, ApplicationListSerializer , ApplicationCreateSerializer
 
 
 class ApplicationListCreateView(
-    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+    mixins.ListModelMixin, 
+    mixins.CreateModelMixin, 
+    generics.GenericAPIView
 ):
     queryset = Application.objects.all()
-    serializer_class = ApplicationListSerialier
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ApplicationCreateSerializer
+        return ApplicationListSerializer
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
 
 
 class ApplicationRUDView(
