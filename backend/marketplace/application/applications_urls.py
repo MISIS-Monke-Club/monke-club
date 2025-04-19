@@ -6,6 +6,7 @@ from .application_views import (
     ApplicationOrderingFieldsView
 )
 
+
 urlpatterns = [
     path("filter-fields/", ApplicationFilterFieldsView.as_view(), name="application-filter-fields"),
     path("ordering-fields/", ApplicationOrderingFieldsView.as_view(), name="application-ordering-fields"),
