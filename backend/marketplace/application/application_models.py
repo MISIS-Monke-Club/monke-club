@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from unidecode import unidecode
 
 
 class Application(models.Model):
@@ -25,8 +26,12 @@ class Application(models.Model):
     )
     slug = models.SlugField(verbose_name="Символьный код", blank=True, unique=True)
 
-    subjects = models.ManyToManyField("marketplace.service", verbose_name="Теги/тег предмета",blank=True)
-    services = models.ManyToManyField("marketplace.subject", verbose_name="Теги типа задачи",blank=True)
+    subjects = models.ManyToManyField(
+        "marketplace.service", verbose_name="Теги/тег предмета", blank=True
+    )
+    services = models.ManyToManyField(
+        "marketplace.subject", verbose_name="Теги типа задачи", blank=True
+    )
 
     date_of_creation = models.DateField(
         verbose_name="Дата создания заявки", default=timezone.now, null=True
@@ -56,9 +61,15 @@ class Application(models.Model):
 
     year = models.IntegerField(choices=YEAR_CHOICES, default=1, verbose_name="Курс")
 
+    file = models.FileField(
+        upload_to='applications/',
+        null=True,
+        blank=True,
+        verbose_name="Файл прикрепленный к заявке"
+    )
+
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(unidecode(self.name))
         super().save()
 
     def __str__(self):
