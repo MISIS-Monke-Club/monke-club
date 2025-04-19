@@ -1,10 +1,12 @@
+import { FormEvent, useCallback } from "react"
+import { z } from "zod"
+import { toast } from "sonner"
+import { useDispatch } from "react-redux"
+import classes from "./login.module.scss"
 import { useLogin } from "@features/auth"
 import { Button } from "@shared/ui/button/ui"
 import { Input } from "@shared/ui/input"
-import { FormEvent, useCallback } from "react"
-import classes from "./login.module.scss"
-import { z } from "zod"
-import { toast } from "sonner"
+import { setUserId } from "@entities/session"
 
 const loginPageParamsSchema = z.object({
     login: z.string().min(1),
@@ -13,6 +15,7 @@ const loginPageParamsSchema = z.object({
 
 export function LoginPage() {
     const { isMutationPending, login } = useLogin()
+    const dispatch = useDispatch()
 
     const handleSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
@@ -47,6 +50,13 @@ export function LoginPage() {
                 </Button>
                 <Button type='submit' disabled={isMutationPending}>
                     Зарегистрироваться
+                </Button>
+                <Button
+                    onClick={() => {
+                        dispatch(setUserId({ userId: "slug-1" }))
+                    }}
+                >
+                    Login with 1
                 </Button>
             </div>
         </form>
