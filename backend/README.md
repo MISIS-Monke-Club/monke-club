@@ -347,9 +347,43 @@ subjects,
 ```
 ***
 
+## GET marketplace/mentors/filters/
+все сортировки у менторов списка
 
 
-
+Структура ответа
+```
+{
+    "courses": [
+        3
+    ],
+    "subjects": [
+        {
+            "value": "math",
+            "label": "Math"
+        },
+        {
+            "value": "info",
+            "label": "Info"
+        }
+    ],
+    "services": [
+        {
+            "value": "test",
+            "label": "Test"
+        },
+        {
+            "value": "testr3",
+            "label": "Testr3"
+        },
+        {
+            "value": "laba",
+            "label": "Laba"
+        }
+    ]
+}
+```
+***
 
 
 
