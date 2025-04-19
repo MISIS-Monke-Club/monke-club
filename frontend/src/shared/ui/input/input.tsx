@@ -1,4 +1,3 @@
-import React from "react"
 import "./Input.scss"
 
 type InputProps = {
@@ -33,10 +32,10 @@ export const Input = ({
 
     return (
         <div className={classes}>
-            {label && <label className="input-label">{label}</label>}
-            <div className="input-inner">
+            {label && <label className='input-label'>{label}</label>}
+            <div className='input-inner'>
                 <input
-                    className="input"
+                    className='input'
                     type={type}
                     value={value}
                     placeholder={placeholder}
@@ -44,7 +43,7 @@ export const Input = ({
                 />
                 {isLoading && disabled}
             </div>
-            {error && <span className="input-error">{error}</span>}
+            {error && <span className='input-error'>{error}</span>}
         </div>
     )
 }

@@ -1,1 +1,2 @@
-export {api as request} from "./api"
+export { api } from "./api"
+export type { RequestModel } from "./model"

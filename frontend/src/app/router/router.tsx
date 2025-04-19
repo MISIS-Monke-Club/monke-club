@@ -50,11 +50,11 @@ export const router = createBrowserRouter(
                                     path: "mentors/:mentorId",
                                     element: <MentorPage />,
                                 },
-                                {
-                                    path: "/request",
-                                    element: <RequestsPage />,
-                                },
                             ],
+                        },
+                        {
+                            path: "request",
+                            element: <RequestsPage />,
                         },
                         {
                             path: "share-items",

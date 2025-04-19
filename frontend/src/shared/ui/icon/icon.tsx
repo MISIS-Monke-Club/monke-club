@@ -17,7 +17,7 @@ export const Icon = ({
         if (iconPosition === "before") {
             return (
                 <div className={classes.wrapper}>
-                    <img src={src}/>
+                    <img src={src} />
                     <span>{data}</span>
                 </div>
             )
@@ -29,8 +29,7 @@ export const Icon = ({
                 </div>
             )
         }
-    }
-    else {
+    } else {
         return (
             <div className={classes.wrapper}>
                 <span>{data}</span>
