@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+import os
 
 
 load_dotenv(override=False)
@@ -34,6 +35,7 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "jazzmin",
     "rest_framework",
     "django.contrib.admin",
@@ -43,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
-    "corsheaders",
     "marketplace",
     "marketplace.mentors",
     "django.contrib.postgres",
@@ -68,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 REST_FRAMEWORK = {
@@ -129,6 +131,10 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     },
 }
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'marketplace')  # или другой путь, если хочешь изменить
 
 
 # Internationalization

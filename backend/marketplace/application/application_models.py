@@ -61,6 +61,13 @@ class Application(models.Model):
 
     year = models.IntegerField(choices=YEAR_CHOICES, default=1, verbose_name="Курс")
 
+    file = models.FileField(
+        upload_to='media/',
+        null=True,
+        blank=True,
+        verbose_name="Файл прикрепленный к заявке"
+    )
+
     def save(self, *args, **kwargs):
         self.slug = slugify(unidecode(self.name))
         super().save()

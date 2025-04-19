@@ -5,6 +5,8 @@ from .application_views import (
     ApplicationFilterFieldsView,
     ApplicationOrderingFieldsView
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("filter-fields/", ApplicationFilterFieldsView.as_view(), name="application-filter-fields"),
@@ -12,3 +14,6 @@ urlpatterns = [
     path("", Alcv.as_view(), name="application-list-create"),
     path("<slug:slug>/", Arud.as_view(), name="application-detail"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
