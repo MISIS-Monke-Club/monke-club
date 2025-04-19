@@ -6,6 +6,7 @@ distlib==0.3.9
 Django==5.2
 django-rest-framework==0.1.0
 djangorestframework==3.16.0
+dotenv==0.9.9
 drf-spectacular==0.28.0
 filelock==3.18.0
 flake8==7.2.0
@@ -20,6 +21,7 @@ platformdirs==4.3.7
 psycopg2-binary==2.9.10
 pycodestyle==2.13.0
 pyflakes==3.3.2
+python-dotenv==1.1.0
 PyYAML==6.0.2
 referencing==0.36.2
 rpds-py==0.24.0
