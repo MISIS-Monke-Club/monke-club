@@ -11,11 +11,6 @@ from marketplace.serializers import ServiceSerializer, SubjectSerializer
 from user.serializers import SocialNetworkUserSerializer
 
 
-#rating
-#photo
-
-
-
 
 
 
