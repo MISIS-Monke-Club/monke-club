@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, Link, Outlet } from "react-router-dom"
 import { Layout } from "../layout"
 import { AuthProvider } from "../providers/auth-provider"
 import { LoginPage } from "@pages/login"
@@ -29,7 +29,11 @@ export const router = createBrowserRouter(
                         {
                             path: "marketplace",
                             element: (
-                                <div>welcome to the marketplace service!</div>
+                                <div>
+                                    <Link to='mentors'>Mentors</Link>welcome to
+                                    the marketplace service!
+                                    <Outlet />
+                                </div>
                             ),
                             errorElement: (
                                 <div>
