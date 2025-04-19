@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 
 class UserBio(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='bio')
     description = models.TextField(blank=True, null=True)
     photo = models.ImageField(upload_to="profile_pics/", blank=True, null=True)
-    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)
+    rating = models.DecimalField(max_digits=5, decimal_places=1, default=5.0)
     course = models.PositiveIntegerField(default=1)
     faculty = models.CharField(max_length=255, blank=True, null=True)
 
