@@ -11,46 +11,54 @@ API для управления заявками (Application) пользова�
 
 ## 🔧 1. Создание заявки
 
-**Endpoint:** `POST http://localhost:3000/api/applications/`  
+**Endpoint:** `POST http://localhost:3000/marketplace/applications/`  
 **Описание:** Создание новой заявки.
 
 ### 🔹 Пример запроса
 
 ```json
 {
-  "name": "Помощь с курсовой работой",
-  "year": 3,
-  "subjects": [1, 2],       // ID объектов Service (например, "Математика", "Физика")
-  "services": [3, 4],       // ID объектов Subject (например, "Консультация", "Решение задач")
-  "description": "Нужна помощь с расчетами",
-  "price": "1500.00",
-  "is_finished": false
+    "subjects": [],
+    "services": [],
+    "name": "",
+    "date_of_creation": null,
+    "description": "",
+    "price": null,
+    "is_finished": false,
+    "year": null,
+    "user": null,
+    "executor_id": null
 }
 
 
 
 📋 2. Получение списка заявок
 
-Endpoint: `GET http://localhost:3000/api/applications/`
+Endpoint: `GET http://localhost:3000/marketplace/applications/`
 Описание: Получение всех заявок текущего пользователя.
 
 🔹 Пример ответа
 
 [
-  {
-    "name": "Помощь с курсовой работой",
-    "year": 3,
-    "subjects": [
-      {"id": 1, "name": "Математика", ...},
-      {"id": 2, "name": "Физика", ...}
-    ],
-    "services": [
-      {"id": 3, "name": "Консультация", ...},
-      {"id": 4, "name": "Решение задач", ...}
-    ],
-    "date_of_creation": "2023-10-01",
-    "price": "1500.00"
-  }
+    {
+        "name": "Заявка без названия12",
+        "username": "root",
+        "year": 5,
+        "subjects": [
+            {
+                "id": 1,
+                "name": "test предмет"
+            }
+        ],
+        "services": [
+            {
+                "id": 1,
+                "name": "тест предмет"
+            }
+        ],
+        "date_of_creation": "2025-04-19",
+        "price": "1000.00"
+    }
 ]
 
 
@@ -59,7 +67,7 @@ Endpoint: `GET http://localhost:3000/api/applications/`
 
 ✏️ 3. Обновление заявки
 
-Endpoint: PUT/PATCH http://localhost:3000/api/applications/{slug}/
+Endpoint: PUT/PATCH http://localhost:3000/marketplace/applications/{slug}/
 Описание: Полное или частичное обновление заявки.
 
 🔹 Проблемный пример
@@ -78,7 +86,7 @@ Endpoint: PUT/PATCH http://localhost:3000/api/applications/{slug}/
 
 🗑️ 4. Удаление заявки
 
-Endpoint: DELETE http://localhost:3000/api/applications/{slug}/
+Endpoint: DELETE http://localhost:3000/marketplace/applications/{slug}/
 Описание: Удаление существующей заявки.
 
 Тело запроса: не требуется.
