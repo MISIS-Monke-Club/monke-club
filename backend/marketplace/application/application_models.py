@@ -62,7 +62,7 @@ class Application(models.Model):
     year = models.IntegerField(choices=YEAR_CHOICES, default=1, verbose_name="Курс")
 
     file = models.FileField(
-        upload_to='media/',
+        upload_to='applications/',
         null=True,
         blank=True,
         verbose_name="Файл прикрепленный к заявке"
