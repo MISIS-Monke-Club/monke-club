@@ -17,7 +17,6 @@ services:
         ports:
             - 8000:5173
         depends_on:
-            - bot
             - backend
         command: sh ./run-server.sh
 
@@ -61,15 +60,3 @@ services:
             - 5433:5432
         healthcheck:
             test: ["CMD", "-f", "http://localhost:5433"]
-
-    bot:
-        container_name: bot
-        build:
-            context: ./bot
-        volumes:
-            - ./bot:/bot
-        env_file: ./.env
-        environment:
-            - TOKEN=${TOKEN}
-            - WEB_APP_URL=${WEB_APP_URL}
-        command: sh -c "python bot.py"
