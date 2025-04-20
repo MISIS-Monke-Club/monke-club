@@ -14,7 +14,6 @@ from user.mixins import IsOwnerMixin
 
 class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
     queryset = Event.objects.all()
-    queryset = Event.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]  
     filterset_class = EventFilter
     ordering_fields = ['price', 'date']  
@@ -78,7 +77,7 @@ class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, Dest
         return self.destroy(request, slug=slug, *args, **kwargs)
     
 class EventFilterFieldsView(APIView):
-    parser_classes=[AllowAny]
+    permission_classes=[AllowAny]
     def get(self, request, *args, **kwargs):
         return Response({
             "fields": {
