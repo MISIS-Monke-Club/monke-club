@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "auth_app",
     "user",
+    "events",
+
 ]
 
 SIMPLE_JWT = {

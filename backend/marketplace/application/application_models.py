@@ -22,7 +22,7 @@ class Application(models.Model):
         related_name="application_creator",
     )
     name = models.CharField(
-        default="Заявка без названия", blank=False, verbose_name="Название заявки"
+        default="Заявка без названия", blank=False, verbose_name="Название заявки",unique=True
     )
     slug = models.SlugField(verbose_name="Символьный код", blank=True, unique=True)
 
