@@ -25,7 +25,7 @@ from .application_filters import ApplicationFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
-
+from user.mixins import IsOwnerMixin
 
 class ApplicationListCreateView(
     mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
@@ -76,8 +76,12 @@ class ApplicationRUDView(
     
 
     def get_permissions(self):
+        redact_methods = ["PUT", "PATCH", "DELETE"]
+
         if self.request.method == "GET":
             return [AllowAny()]
+        elif self.request.method in redact_methods:
+            return [IsOwnerMixin()]
         return [IsAuthenticated()]
 
     def get(self, request, *args, **kwargs):
