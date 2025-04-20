@@ -5,8 +5,7 @@ from .models import Event, EventType
 class EventTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventType
-        fields = "__all__"
-        extra_kwargs = {"slug": {"read_only": True}}
+        fields = ["type_name"]
 
 
 class EventListSerializer(serializers.ModelSerializer):

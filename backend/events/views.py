@@ -36,6 +36,7 @@ class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, Dest
         if self.request.method == "PUT":
             return EventCreateUpdateSerializer
         return EventDetailSerializer
+    lookup_field = "slug"
 
     def get(self, request, slug, *args, **kwargs):
         return self.retrieve(request, slug=slug, *args, **kwargs)
