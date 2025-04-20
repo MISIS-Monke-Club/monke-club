@@ -4,17 +4,15 @@ from user.models import UserBio
 from user.models import SocialNetwork
 
 
-
 class SocialNetworkUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialNetwork
         fields = ("name", "text")
 
 
-
 class UserBioSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username', read_only=True)
-    full_name = serializers.SerializerMethodField(read_only=True)
+    full_name = serializers.CharField(required=False)
     rating = serializers.SerializerMethodField(read_only=True)
     social_networks = SocialNetworkUserSerializer(many=True, required=False)
 
@@ -22,14 +20,27 @@ class UserBioSerializer(serializers.ModelSerializer):
         model = UserBio
         fields = ("username", "full_name", "rating", "photo", "course", "faculty", "social_networks")
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['full_name'] = f"{instance.user.first_name} {instance.user.last_name}".strip()
+        return data
+
     def get_rating(self, obj):
         return obj.rating
 
-    def get_full_name(self, obj):
-        return obj.user.first_name + ' ' + obj.user.last_name
-
     def update(self, instance, validated_data):
         social_networks_data = validated_data.pop('social_networks', None)
+
+        full_name = validated_data.pop('full_name', None)
+
+        if full_name:
+            first_name, *rest = full_name.strip().split(" ", 1)
+            last_name = rest[0] if rest else ""
+            user = instance.user
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
