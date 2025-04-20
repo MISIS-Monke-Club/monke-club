@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "auth_app",
     "user",
     "events",
+
 ]
 
 SIMPLE_JWT = {
