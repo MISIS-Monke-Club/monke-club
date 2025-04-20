@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: toRem(4);
+    font-size: toRem(14);
+    font-weight: 400;
+    line-height: toRem(20);
+}
