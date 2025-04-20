@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux"
 import classes from "./login.module.scss"
 import { useLogin } from "@features/auth"
 import { Button } from "@shared/ui/button/ui"
-import { Input } from "@shared/ui/input"
 import { setUserId } from "@entities/session"
 
 const loginPageParamsSchema = z.object({
@@ -42,8 +41,8 @@ export function LoginPage() {
 
     return (
         <form onSubmit={handleSubmit} className={classes.form}>
-            <Input name='login' placeholder='Введите ваш логин' required />
-            <Input name='password' placeholder='Введите ваш логин' required />
+            {/* <Input name='login' placeholder='Введите ваш логин' required /> */}
+            {/* <Input name='password' placeholder='Введите ваш логин' required /> */}
             <div className={classes.actions}>
                 <Button type='submit' disabled={isMutationPending}>
                     Логин

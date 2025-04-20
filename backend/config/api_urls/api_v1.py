@@ -7,4 +7,5 @@ urlpatterns = [
     path("profile/", include("user.urls")),
     path('marketplace/', include('marketplace.urls')),
     path('vacancies/', include('vacancies.urls')),
+    path('events/',include("events.urls")),
 ]

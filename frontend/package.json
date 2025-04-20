@@ -21,6 +21,7 @@
         "@tanstack/react-query-devtools": "^5.71.3",
         "@vitejs/plugin-react": "^4.3.4",
         "axios": "^1.8.1",
+        "clsx": "^2.1.1",
         "dotenv": "^16.4.7",
         "path": "^0.12.7",
         "react": "^18.3.1",

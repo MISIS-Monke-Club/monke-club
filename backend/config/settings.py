@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+import os
 
 
 load_dotenv(override=False)
@@ -34,6 +35,7 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "jazzmin",
     "rest_framework",
     "django.contrib.admin",
@@ -42,16 +44,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_filters',
-    "corsheaders",
-
+    "django_filters",
     "marketplace",
     "marketplace.mentors",
     "django.contrib.postgres",
     "rest_framework_simplejwt",
     "auth_app",
     "user",
-    "vacancies"
+    "events",
+
 ]
 
 SIMPLE_JWT = {
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 REST_FRAMEWORK = {
@@ -133,11 +135,15 @@ DATABASES = {
     },
 }
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -177,7 +183,7 @@ JAZZMIN_SETTINGS = {
 }
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 
 
