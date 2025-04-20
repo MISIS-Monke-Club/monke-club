@@ -10,7 +10,7 @@ import { typedQuery } from "@shared/lib/precooked-methods"
 
 export const api = {
     baseKey: ["application"],
-    baseUrl: "v1/marketplace/applications/",
+    baseUrl: "marketplace/applications/",
 
     getRequestBySlug: (slug: string) =>
         queryOptions<FullRequestModel>({

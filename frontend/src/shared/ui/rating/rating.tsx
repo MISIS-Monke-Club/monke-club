@@ -1,6 +1,13 @@
+import { ReactNode } from "react"
+import React from "react"
 import classes from "./rating.module.scss"
 
-export function Rating({ rating }: { rating: number }) {
+type RatingProps = {
+    rating: number
+    component?: ReactNode
+}
+
+export function Rating({ rating, component = "+" }: RatingProps) {
     if (rating < 0.5) {
         return (
             <div className={classes.value}>
@@ -12,7 +19,9 @@ export function Rating({ rating }: { rating: number }) {
         <div className={classes.wrapper}>
             {rating >= 0.5 &&
                 Array.from({ length: Math.round(rating) }).map(() => (
-                    <span>+</span>
+                    <React.Fragment key={crypto.randomUUID()}>
+                        {component}
+                    </React.Fragment>
                 ))}
             <div className={classes.value}>
                 <p>{rating}</p>

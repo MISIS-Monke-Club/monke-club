@@ -1,2 +1,2 @@
 export { getMentorsList } from "./api"
-export { MentorsList } from "./mentors-list"
+export { MentorsList } from "./ui/mentors-list"

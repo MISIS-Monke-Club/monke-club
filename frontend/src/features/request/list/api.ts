@@ -6,8 +6,7 @@ import { instance } from "@shared/api"
 
 export const api = {
     baseKey: ["application"],
-    baseUrl: "v1/marketplace/applications/",
-
+    baseUrl: "marketplace/applications/",
     getAllRequests: () =>
         queryOptions<RequestModel[]>({
             queryKey: [...api.baseKey],
