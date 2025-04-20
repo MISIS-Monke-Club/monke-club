@@ -2,20 +2,25 @@ from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyMod
 from rest_framework.generics import GenericAPIView
 from .models import Event,EventType
 from .serializers import EventListSerializer, EventDetailSerializer, EventCreateUpdateSerializer,EventTypeSerializer
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter,SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import EventFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-
 class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
     queryset = Event.objects.all()
     queryset = Event.objects.all()
-    filter_backends = [DjangoFilterBackend, OrderingFilter]  
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]  
     filterset_class = EventFilter
     ordering_fields = ['price', 'date']  
     ordering = ['-date']  
+    search_fields = [
+    'title',
+    'location',
+    'description',
+    'event_type__type_name',
+    ]
 
     def get_serializer_class(self):
         if self.request.method == "POST":
