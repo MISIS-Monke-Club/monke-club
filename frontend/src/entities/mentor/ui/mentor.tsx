@@ -31,10 +31,14 @@ export function MentorCard({ mentor }: { mentor: MentorModel }) {
                                 : "Неизвестный пользователь"}
                         </h2>
                         <div className={classes.rating}>
-                            <p>
-                                <span>⭐</span>
-                                <span>{mentor.rating}</span>
-                            </p>
+                            <p>{mentor.rating}</p>
+                            <img
+                                src='/star-icon.svg'
+                                alt='star icon'
+                                width='25'
+                                height='25'
+                                loading='lazy'
+                            />
                         </div>
                     </div>
                     <div className={classes.row}>

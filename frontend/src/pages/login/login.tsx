@@ -4,7 +4,7 @@ import { toast } from "sonner"
 import { useDispatch } from "react-redux"
 import classes from "./login.module.scss"
 import { useLogin } from "@features/auth"
-import { Button } from "@shared/ui/button/ui"
+import { Button } from "@shared/ui/button"
 import { setUserId } from "@entities/session"
 
 const loginPageParamsSchema = z.object({
@@ -51,6 +51,7 @@ export function LoginPage() {
                     Зарегистрироваться
                 </Button>
                 <Button
+                    type='button'
                     onClick={() => {
                         dispatch(setUserId({ userId: "slug-1" }))
                     }}
