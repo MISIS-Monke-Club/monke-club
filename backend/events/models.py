@@ -3,7 +3,6 @@ from django.db import models
 
 class EventType(models.Model):
     type_name=models.CharField(default="Тип мероприятия не указан",verbose_name="Тип мероприятия",null=False)
-
     def __str__(self):
         return self.type_name
 
