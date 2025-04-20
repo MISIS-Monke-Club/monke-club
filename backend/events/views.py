@@ -43,6 +43,9 @@ class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, Dest
 
     def put(self, request, slug, *args, **kwargs):
         return self.update(request, slug=slug, *args, **kwargs)
+    
+    def patch(self, request, slug, *args, **kwargs):
+        return self.partial_update(request, slug=slug, *args, **kwargs)
 
     def delete(self, request, slug, *args, **kwargs):
         return self.destroy(request, slug=slug, *args, **kwargs)
