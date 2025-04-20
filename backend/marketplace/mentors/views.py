@@ -30,10 +30,17 @@ class MentorViewSet(mixins.RetrieveModelMixin,
                         GenericViewSet):
     queryset = Mentor.objects.all().distinct()
     lookup_field = 'user__username'
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
     filterset_class = MentorFilters
     ordering_fields = ["count_successful_transactions", "rating"]
     ordering = ["-count_successful_transactions"]
+    search_fields = [
+        'user__username',
+        'user__first_name',
+        'user__last_name',
+        'subjects__name',
+        'services__name',
+    ]
 
     ordering_labels = {
         "count_successful_transactions": "Успешных сделок (по возрастанию)",

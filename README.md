@@ -269,7 +269,8 @@ Content-Type: application/json
       "text": "sosi_bibu"
     }
   ],
-  "faculty": "test"
+  "faculty": "test",
+  "full_name": "Alex Topand"
 }
 ```
 Пример успешного ответа (200 OK)
@@ -290,7 +291,8 @@ Content-Type: application/json
       "name": "vk",
       "text": "sosi_bibu"
     }
-  ]
+  ],
+    "full_name": "Alex Topand"
 }
 ```
 
@@ -317,8 +319,8 @@ Content-Type: application/json
 |               |         | `rating` — по возрастанию рейтинга                                      |
 |               |         | `-rating` — по убыванию рейтинга  <br/>http://localhost:3000/api/v1/marketplace/mentors/ordering-fields/                                      |
 | Другие фильтры| —       | Зависит от реализации `MentorFilters`. См. `GET /api/v1/marketplace/mentors/filters/` |
-
 ---
+еще поиск параметр search
 
 #### Пример запроса с сортировкой
 
