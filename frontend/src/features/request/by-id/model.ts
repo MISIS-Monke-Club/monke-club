@@ -21,7 +21,7 @@ export const fullRequestDTOschema = z.object({
     description: z.string(),
     price: z.string(),
     is_finished: z.boolean(),
-    file: z.string().url(),
+    file: z.string().url().nullable(),
     user: z.number(),
     executor_id: z.number(),
 })
@@ -39,7 +39,7 @@ export type FullRequestModel = {
     description: string
     price: number
     isFinished: boolean
-    file: string
+    file: string | null
     user: number
     executorId: number
 }

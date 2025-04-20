@@ -18,7 +18,7 @@ export function RequestsPage() {
     }
 
     return (
-        <div className={classes.div}>
+        <div>
             <h1 className={classes.title}>Request Page</h1>
             <p>This is the request page.</p>
             {data?.map((request) => (
