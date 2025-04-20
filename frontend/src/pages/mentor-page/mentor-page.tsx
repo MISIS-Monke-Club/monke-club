@@ -27,9 +27,8 @@ export function MentorPage() {
     }
 
     return (
-        <div>
-            <h1>Mentor`s page</h1>
+        <>
             <MentorById username={id} />
-        </div>
+        </>
     )
 }

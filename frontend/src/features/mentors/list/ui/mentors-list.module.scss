@@ -1,0 +1,36 @@
+.mentorsList {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(28);
+    align-items: center;
+
+    width: 100%;
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        gap: toRem(20);
+        align-items: center;
+
+        width: 100%;
+
+        .filters {
+            border: none;
+            background-color: transparent;
+            outline: none;
+
+            &:hover {
+                color: var(--color-accent);
+                transition-duration: var(--transition-duration);
+            }
+        }
+    }
+}
+
+.list {
+    width: 100%;
+}
+
+.search {
+    width: 100%;
+}

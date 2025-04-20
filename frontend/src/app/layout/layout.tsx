@@ -4,7 +4,7 @@ import { Header } from "./header/header"
 
 export function Layout() {
     return (
-        <div className={classes.appContainer}>
+        <div className={`${classes.appContainer} light`}>
             <div className='w-[100dvw] h-[100dvh] fixed -z-50 bg-background text-foreground' />
             <div className={classes.page}>
                 <Header />

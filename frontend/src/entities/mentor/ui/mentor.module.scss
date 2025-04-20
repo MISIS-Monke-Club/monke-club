@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 20px;
     align-items: center;
+    justify-content: space-between;
 
     width: 100%;
     padding: 20px 16px;
@@ -15,9 +16,9 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
-    align-items: center;
+    align-items: start;
 
-    width: 100px;
+    width: 100%;
 
     .image {
         border-radius: 28px;
@@ -29,16 +30,38 @@
         gap: 8px;
         align-items: center;
 
+        width: 100%;
+
         .row {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            width: 100%;
+        }
+
+        .subjects {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: start;
+
+            width: 100%;
+        }
+
+        .rating {
+            display: flex;
+            flex-direction: row;
+            gap: toRem(10);
+            align-items: center;
         }
     }
 }
 
-.tags {
+.services {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: start;
+
+    width: 100%;
 }

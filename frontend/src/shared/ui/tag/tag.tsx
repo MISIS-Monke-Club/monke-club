@@ -1,12 +1,12 @@
 import clsx from "clsx"
 import classes from "./tag.module.scss"
 
-type TagProps = {
-    text: string
-    variants?: "subject" | "type" | "secondary"
+type TagProps = React.ComponentProps<"span"> & {
+    variants?: "subject" | "type"
 }
 
-export const Tag = ({ text, variants = "subject" }: TagProps) => {
-    const combinedClassNames = clsx(classes.tag, classes[variants])
-    return <div className={combinedClassNames}>{text}</div>
+export const Tag = ({ variants = "subject", className, ...rest }: TagProps) => {
+    const combinedClassNames = clsx(classes.tag, classes[variants], className)
+
+    return <span className={combinedClassNames} {...rest} />
 }

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link, Outlet } from "react-router-dom"
+import { createBrowserRouter, Link } from "react-router-dom"
 import { Layout } from "../layout"
 import { AuthProvider } from "../providers/auth-provider"
 import { LoginPage } from "@pages/login"
@@ -33,13 +33,6 @@ export const router = createBrowserRouter(
                     children: [
                         {
                             path: "marketplace",
-                            element: (
-                                <div>
-                                    <Link to='mentors'>Mentors</Link>welcome to
-                                    the marketplace service!
-                                    <Outlet />
-                                </div>
-                            ),
                             errorElement: (
                                 <div>
                                     Что-то пошло не так в сервисе маркетплейса(
@@ -58,16 +51,17 @@ export const router = createBrowserRouter(
                                     path: "mentors/:mentorId",
                                     element: <MentorPage />,
                                 },
+                                {
+                                    path: "request",
+                                    element: <RequestsPage />,
+                                },
+                                {
+                                    path: "request/:slug",
+                                    element: <RequestDetail />,
+                                },
                             ],
                         },
-                        {
-                            path: "request",
-                            element: <RequestsPage />,
-                        },
-                        {
-                            path: "request/:slug",
-                            element: <RequestDetail />,
-                        },
+
                         {
                             path: "vacations",
                             element: <VacationPage />,

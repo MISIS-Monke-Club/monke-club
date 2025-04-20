@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+}
+
+.value {
+    font-size: toRem(18);
+}

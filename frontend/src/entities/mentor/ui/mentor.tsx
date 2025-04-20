@@ -1,14 +1,23 @@
 import { clsx } from "clsx"
-import { MentorModel } from "../model"
+import { useNavigate } from "react-router-dom"
+import { MentorModel } from "../model/domain"
+import { api } from "../api"
 import classes from "./mentor.module.scss"
+import { Tag } from "@shared/ui/tag"
 
 export function MentorCard({ mentor }: { mentor: MentorModel }) {
+    const navigate = useNavigate()
+
+    function clickHandler() {
+        navigate(`/${api.baseUrl}/${mentor.username}`)
+    }
+
     return (
-        <article className={classes.mentorCard}>
+        <article className={classes.mentorCard} onClick={clickHandler}>
             <div className={classes.main}>
                 <img
                     className={classes.image}
-                    src={mentor.photo}
+                    src={mentor.photo || ""}
                     alt='mentor image'
                     width='95'
                     height='120'
@@ -16,27 +25,42 @@ export function MentorCard({ mentor }: { mentor: MentorModel }) {
                 />
                 <div className={classes.info}>
                     <div className={classes.row}>
-                        <h2 className={classes.name}>{mentor.fullName}</h2>
+                        <h2 className={classes.name}>
+                            {mentor.fullName.length !== 0
+                                ? mentor.fullName
+                                : "Неизвестный пользователь"}
+                        </h2>
                         <div className={classes.rating}>
-                            <p>рейтинг:{mentor.rating}</p>
+                            <p>{mentor.rating}</p>
+                            <img
+                                src='/star-icon.svg'
+                                alt='star icon'
+                                width='25'
+                                height='25'
+                                loading='lazy'
+                            />
                         </div>
                     </div>
-                    <div className={clsx(classes.row, classes.tags)}>
+                    <div className={classes.row}>
                         <p>
                             {mentor.countSuccessfulTransactions} завершенных
                             сделок
                         </p>
                     </div>
-                    <div className={classes.row}>
+                    <div className={clsx(classes.row, classes.subjects)}>
                         {mentor.subjects.map((el) => (
-                            <span key={el.id}>{el.name}</span>
+                            <Tag key={el.id} variants='subject'>
+                                {el.name}
+                            </Tag>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className={clsx(classes.typeTags, classes.tags)}>
+            <div className={clsx(classes.typeTags, classes.services)}>
                 {mentor.services.map((el) => (
-                    <span key={el.id}>{el.name}</span>
+                    <Tag key={el.id} variants='type'>
+                        {el.name}
+                    </Tag>
                 ))}
             </div>
         </article>
