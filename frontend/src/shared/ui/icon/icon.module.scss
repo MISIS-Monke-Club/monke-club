@@ -1,9 +1,16 @@
 .wrapper {
     display: flex;
+    gap: toRem(4);
     align-items: center;
     justify-content: center;
-    gap: toRem(4);
-    font-size: toRem(14);
-    font-weight: 400;
-    line-height: toRem(20);
+
+    font-size: toRem(18);
+    font-weight: 600;
+    line-height: toRem(28);
+}
+
+.lg {
+    font-size: toRem(36);
+    font-weight: 600;
+    line-height: toRem(44);
 }

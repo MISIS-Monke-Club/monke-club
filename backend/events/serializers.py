@@ -11,7 +11,7 @@ class EventTypeSerializer(serializers.ModelSerializer):
 class EventListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'title', 'date', 'location', 'image']
+        fields = ['id', 'title', 'date', 'location', 'image','slug']
         extra_kwargs = {"slug": {"read_only": True}}
 
 
@@ -29,6 +29,7 @@ class EventDetailSerializer(serializers.ModelSerializer):
             'registration_link',
             'event_type',
             'image',
+            'slug',
         ]
         extra_kwargs = {"slug": {"read_only": True}}
 

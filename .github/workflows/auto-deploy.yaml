@@ -1,34 +1,33 @@
-name: Deploy to Remote Server
+name: deploy
 
 on:
   push:
     branches:
-        - develop
+      - develop
 
 jobs:
   deploy:
-    name: Deploy via SSH
+    name: Деплой
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Клон репы
         uses: actions/checkout@v3
 
-      - name: Add SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan cs-lineups.ru >> ~/.ssh/known_hosts
-
-      - name: Deploy to server
-        run: |
-          ssh root@cs-lineups.ru << 'EOF'
-            cd /root/cs-smokes/
-
+      - name: SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            if [ ! -d "/root/monke-club" ]; then
+              cd /root
+              git clone https://Topando:${{ secrets.GH_DEPLOY_TOKEN }}@github.com/MISIS-Monke-Club/monke-club.git
+            fi
+            
+            cd /root/monke-club
+            git config pull.rebase false
             git pull origin develop
-
-            docker-compose -f docker-compose.prod.yaml down
-            docker-compose -f docker-compose.prod.yaml build --no-cache
-            docker-compose -f docker-compose.prod.yaml up -d
-          EOF
+            docker-compose -f docker-compose.prod.yaml pull
+            docker-compose -f docker-compose.prod.yaml up -d --build

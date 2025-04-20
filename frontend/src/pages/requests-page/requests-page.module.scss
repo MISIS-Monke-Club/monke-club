@@ -1,12 +1,10 @@
-.title {
-    margin-bottom: toRem(40);
-    font-size: toRem(40);
-    font-weight: 600;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-.request {
-    padding: 30px;
-    border: 2px solid black;
-    border-radius: 7px;
-    color: black;
+.link {
+    color: var(--color-main-text);
+    text-decoration: none;
 }

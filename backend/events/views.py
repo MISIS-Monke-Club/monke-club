@@ -2,24 +2,39 @@ from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyMod
 from rest_framework.generics import GenericAPIView
 from .models import Event,EventType
 from .serializers import EventListSerializer, EventDetailSerializer, EventCreateUpdateSerializer,EventTypeSerializer
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter,SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import EventFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from user.mixins import IsOwnerMixin
+
 
 
 class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
     queryset = Event.objects.all()
-    queryset = Event.objects.all()
-    filter_backends = [DjangoFilterBackend, OrderingFilter]  
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]  
     filterset_class = EventFilter
     ordering_fields = ['price', 'date']  
     ordering = ['-date']  
+    search_fields = [
+    'title',
+    'location',
+    'description',
+    'event_type__type_name',
+    ]
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [IsAuthenticated()]
+        return [AllowAny()]
+    
+
 
     def get_serializer_class(self):
         if self.request.method == "POST":
-            return EventCreateUpdateSerializer
+            return EventCreateUpdateSerializer 
         return EventListSerializer
     
     def get(self, request, *args, **kwargs):
@@ -32,6 +47,17 @@ class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
 class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
     queryset = Event.objects.all()
 
+    
+
+    def get_permissions(self):
+        redact_methods = ["PUT", "PATCH", "DELETE"]
+
+        if self.request.method == "GET":
+            return [AllowAny()]
+        elif self.request.method in redact_methods:
+            return [IsOwnerMixin()]
+        return [IsAuthenticated()]
+
     def get_serializer_class(self):
         if self.request.method == "PUT":
             return EventCreateUpdateSerializer
@@ -43,11 +69,15 @@ class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, Dest
 
     def put(self, request, slug, *args, **kwargs):
         return self.update(request, slug=slug, *args, **kwargs)
+    
+    def patch(self, request, slug, *args, **kwargs):
+        return self.partial_update(request, slug=slug, *args, **kwargs)
 
     def delete(self, request, slug, *args, **kwargs):
         return self.destroy(request, slug=slug, *args, **kwargs)
     
 class EventFilterFieldsView(APIView):
+    permission_classes=[AllowAny]
     def get(self, request, *args, **kwargs):
         return Response({
             "fields": {
@@ -62,6 +92,7 @@ class EventFilterFieldsView(APIView):
         })
 
 class EventOrderingFieldsView(APIView):
+    permission_classes=[AllowAny]
     def get(self, request, *args, **kwargs):
         return Response({
             "ordering_fields": [
@@ -73,6 +104,7 @@ class EventOrderingFieldsView(APIView):
         })
 
 class EventTypeListView(GenericAPIView, ListModelMixin):
+    permission_classes=[AllowAny]
     queryset = EventType.objects.all()
     serializer_class = EventTypeSerializer
     pagination_class = None

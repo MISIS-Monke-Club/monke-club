@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import classes from "./icon.module.scss"
 
 type IconProps = {
@@ -5,6 +6,7 @@ type IconProps = {
     src?: string
     withLabel?: boolean
     iconPosition?: "before" | "after"
+    size?: "lg" | "sm"
 }
 
 export const Icon = ({
@@ -12,19 +14,24 @@ export const Icon = ({
     iconPosition = "before",
     src = "",
     withLabel = false,
+    size = "sm",
 }: IconProps) => {
+    const spanClass = clsx({
+        [classes.lg]: size === "lg",
+    })
+
     if (withLabel) {
         if (iconPosition === "before") {
             return (
                 <div className={classes.wrapper}>
                     <img src={src} />
-                    <span>{data}</span>
+                    <span className={spanClass}>{data}</span>
                 </div>
             )
         } else {
             return (
                 <div className={classes.wrapper}>
-                    <span>{data}</span>
+                    <span className={spanClass}>{data}</span>
                     <img src={src} />
                 </div>
             )
@@ -32,7 +39,7 @@ export const Icon = ({
     } else {
         return (
             <div className={classes.wrapper}>
-                <span>{data}</span>
+                <span className={spanClass}>{data}</span>
             </div>
         )
     }

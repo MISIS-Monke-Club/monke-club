@@ -7,6 +7,9 @@ import { MentorsPage } from "@pages/mentors/mentors"
 import { MentorPage } from "@pages/mentor-page/mentor-page"
 import { RequestsPage } from "@pages/requests-page"
 import { RequestDetail } from "@pages/detailed-request-page"
+import { FirstMentors } from "@pages/first-mentors-page"
+import { VacationPage } from "@pages/vacation-page"
+import { EventsPage } from "@pages/events-page"
 
 export const router = createBrowserRouter(
     [
@@ -38,13 +41,7 @@ export const router = createBrowserRouter(
                             children: [
                                 {
                                     path: "",
-                                    element: (
-                                        <div>
-                                            Welcome to the marketplace service
-                                            <Link to='mentors'>Mentors</Link>
-                                            <Link to='request'>Requests</Link>
-                                        </div>
-                                    ),
+                                    element: <FirstMentors />,
                                 },
                                 {
                                     path: "mentors",
@@ -65,6 +62,14 @@ export const router = createBrowserRouter(
                             ],
                         },
 
+                        {
+                            path: "vacations",
+                            element: <VacationPage />,
+                        },
+                        {
+                            path: "events",
+                            element: <EventsPage />,
+                        },
                         {
                             path: "share-items",
                             element: (

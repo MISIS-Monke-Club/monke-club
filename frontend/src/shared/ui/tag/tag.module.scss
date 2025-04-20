@@ -1,20 +1,26 @@
 .tag {
     display: flex;
 
-    padding: toRem(4) toRem(16);
-    border-radius: 20px;
+    padding: toRem(4) toRem(12);
+    border-radius: toRem(16);
 
-    font-size: toRem(12);
+    font-size: toRem(16);
     font-weight: 500;
-    line-height: toRem(16);
+    line-height: toRem(24);
     color: var(--color-main-text);
 }
 
 .subject {
-    color: var(--color-text-alt);
-    background-color: var(--color-accent);
+    color: var(--color-background-alt);
+    background-color: var(--color-tag-subject);
 }
 
 .type {
-    background-color: var(--color-accent-alt);
+    color: var(--color-main-text);
+    background-color: var(--color-tag-type);
+}
+
+.secondary {
+    color: var(--color-main-text);
+    background-color: var(--color-background-alt);
 }
