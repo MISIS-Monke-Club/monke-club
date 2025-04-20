@@ -8,6 +8,7 @@ from .filters import EventFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated,AllowAny
+from user.mixins import IsOwnerMixin
 
 
 
@@ -47,9 +48,15 @@ class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
 class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
     queryset = Event.objects.all()
 
+    
+
     def get_permissions(self):
+        redact_methods = ["PUT", "PATCH", "DELETE"]
+
         if self.request.method == "GET":
             return [AllowAny()]
+        elif self.request.method in redact_methods:
+            return [IsOwnerMixin()]
         return [IsAuthenticated()]
 
     def get_serializer_class(self):
