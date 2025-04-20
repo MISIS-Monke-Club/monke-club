@@ -22,9 +22,10 @@ Host: localhost:3000
 Content-Type: application/json
 
 {
-  "username": "Topand",
-  "email": "topand@topand.ru",
-  "password": "12345678"
+  "username": str,
+  "email": str,
+  "password": str
+  "password2": str
 }
 ```
 
@@ -34,9 +35,9 @@ Content-Type: application/json
   "message": "User successfully registered",
   "user": {
     "id": 2,
-    "username": "Topand",
-    "email": "topand@topand.ru",
-    "is_active": true
+    "username": str,
+    "email": str,
+    "is_active": bool
   }
 }
 ```
@@ -78,8 +79,8 @@ Content-Type: application/json
 ```html
 Пример успешного ответа (200 OK)
 {
-  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV…",
-  "access":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVC…",
+  "refresh": str,
+  "access":  str
   "user": {
     "id": 2,
     "username": "Topand",
@@ -193,12 +194,12 @@ Host: localhost:3000
 Пример успешного ответа (200 OK)
 ```html
 {
-  "username": "Topand",
-  "full_name": " ",
-  "rating": 5.0,
-  "photo": null,
-  "course": 2,
-  "faculty": "fsdf",
+  "username": str,
+  "full_name": str,
+  "rating": float,
+  "photo": str | null,
+  "course": int,
+  "faculty": str | null,
   "social_networks": [
     {
       "name": "tg",
@@ -208,7 +209,7 @@ Host: localhost:3000
       "name": "vk",
       "text": "sosi_bibu"
     }
-  ]
+  ] | []
 }
 ```
 
@@ -279,9 +280,9 @@ Content-Type: application/json
   "username": "Topand",
   "full_name": " ",
   "rating": 5.0,
-  "photo": null,
+  "photo": str | null,
   "course": 2,
-  "faculty": "test",
+  "faculty": str | null,
   "social_networks": [
     {
       "name": "tg",
@@ -292,7 +293,7 @@ Content-Type: application/json
       "text": "sosi_bibu"
     }
   ],
-    "full_name": "Alex Topand"
+    "full_name": str
 }
 ```
 
@@ -328,7 +329,29 @@ Content-Type: application/json
 GET http://localhost:3000/api/v1/marketplace/mentors/?ordering=-rating&subjects=test3,test4 HTTP/1.1
 Host: localhost:3000
 ```
-
+Ответ
+```html
+[
+    {
+        "username": str",
+        "full_name": str | "",
+        "services": [] | [1,2],
+        "subjects": [] | [1,2],
+        "rating": float,
+        "photo": str | null,
+        "count_successful_transactions": int
+    },
+    {
+        "username": "tuntun_user1",
+        "full_name": "",
+        "services": [],
+        "subjects": [],
+        "rating": 5.0,
+        "photo": null,
+        "count_successful_transactions": 5
+    }
+]
+```
 
 ### 🔹 Создание профиля ментора
 
@@ -413,24 +436,24 @@ Host: localhost:3000
 Пример успешного ответа (200 OK)
 ```html
 {
-    "username": "Topand",
-    "full_name": "",
-    "description": "",
+    "username": str",
+    "full_name": str;
+    "description": str,
     "services": [
         {
             "id": 1,
             "name": "test"
         }
-    ],
-    "rating": 5.0,
-    "photo": null,
+    ] | [],
+    "rating": int,
+    "photo": str | null,
     "subjects": [
         {
             "id": 1,
             "name": "test3"
         }
-    ],
-    "count_successful_transactions": 0,
+    ] | [],
+    "count_successful_transactions": int,
     "social_network": [
         {
             "name": "tg",
@@ -440,9 +463,9 @@ Host: localhost:3000
             "name": "vk",
             "text": "sosi_bibu"
         }
-    ],
-    "course": 2,
-    "faculty": "test"
+    ] | [],
+    "course": int,
+    "faculty": str | null;
 }
 ```
 
@@ -501,8 +524,8 @@ Content-Type: application/json
 {
   "services": [1],
   "subjects": [1],
-  "description": "",
-  "count_successful_transactions": 0
+  "description": str,
+  "count_successful_transactions": int
 }
 ```
 
@@ -530,7 +553,7 @@ Host: localhost:3000
 [
   {
     "id": 1,
-    "name": "test"
+    "name": str
   },
   {
     "id": 2,
@@ -563,7 +586,7 @@ Host: localhost:3000
 [
     {
         "id": 1,
-        "name": "test3"
+        "name": str
     },
     {
         "id": 2,
