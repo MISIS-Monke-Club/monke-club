@@ -14,10 +14,8 @@ import {
     SheetTitle,
     SheetDescription,
     Sheet,
-    SheetFooter,
 } from "@shared/ui/sheet"
 import { Button } from "@shared/ui/button"
-import { Tag } from "@shared/ui/tag"
 
 const mentorsMaper = (elements: MentorModel[]): ReactNode => (
     <>
@@ -30,15 +28,15 @@ const mentorsMaper = (elements: MentorModel[]): ReactNode => (
 export function MentorsList() {
     const { addParams, params, deleteParams } = useQueryPrams()
     const search = params.get("search")?.toString()
+    const course = params.get("course")?.toString()
     const { data = [], isLoading } = useQuery(
         getMentorsList({
             search,
+            course,
         })
     )
 
     const handleChange = useDebouncedCallback((val: string) => {
-        params.set("page", "1")
-
         if (val.length !== 0) {
             addParams("search", val)
         } else {
@@ -86,16 +84,51 @@ export function MentorsList() {
                         <SheetHeader>
                             <SheetTitle>Фильтры и сортировки</SheetTitle>
                             <SheetDescription>
-                                Тут вы можете выполнить фильрацию
+                                Тут вы можете выполнить фильтрацию
                             </SheetDescription>
-                            <SheetFooter>
-                                <Button asChild>
-                                    <Tag>Курсовая</Tag>
-                                </Button>
-                                <Button asChild>
-                                    <Tag>Дипломная</Tag>
-                                </Button>
-                            </SheetFooter>
+                            Курс
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "1")
+                                }}
+                            >
+                                1
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "2")
+                                }}
+                            >
+                                2
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "3")
+                                }}
+                            >
+                                3
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "4")
+                                }}
+                            >
+                                4
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "5")
+                                }}
+                            >
+                                5
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    addParams("course", "6")
+                                }}
+                            >
+                                6
+                            </Button>
                         </SheetHeader>
                     </SheetContent>
                 </Sheet>
