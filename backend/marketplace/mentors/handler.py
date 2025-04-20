@@ -11,6 +11,6 @@ class GeFiltersEndpoint:
     def get_filters(self):
         return {
             "courses": list(self.courses),
-            "subjects": [{"value": s["name"], "label": s["name"].capitalize()} for s in self.subjects],
-            "services": [{"value": s["name"], "label": s["name"].capitalize()} for s in self.services],
+            "subject": [{"value": s["name"], "label": s["name"].capitalize()} for s in self.subjects],
+            "service": [{"value": s["name"], "label": s["name"].capitalize()} for s in self.services],
         }
