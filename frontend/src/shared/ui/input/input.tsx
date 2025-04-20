@@ -1,7 +1,10 @@
+import clsx from "clsx"
 import "./Input.scss"
+import { ChangeEvent } from "react"
 
 type InputProps = {
     value?: string
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
     placeholder?: string
     type?: string
     label?: string
@@ -12,38 +15,40 @@ type InputProps = {
 }
 
 export const Input = ({
-    value,
+    value = "",
+    onChange,
     placeholder = "",
     type = "text",
     label,
     error,
     isLoading = false,
     disabled = false,
-    className = "",
+    className,
 }: InputProps) => {
-    const classes = [
-        "input-wrapper",
-        error && "input-wrapper--error",
-        isLoading && "input-wrapper--loading",
-        className,
-    ]
-        .filter(Boolean)
-        .join(" ")
+    const wrapperClass = clsx(
+        "wrapper",
+        error && "error",
+        isLoading && "loading",
+        className
+    )
 
     return (
-        <div className={classes}>
-            {label && <label className='input-label'>{label}</label>}
-            <div className='input-inner'>
+        <div className={wrapperClass}>
+            {label && <label className='label'>{label}</label>}
+
+            <div className='inner'>
                 <input
                     className='input'
                     type={type}
                     value={value}
+                    onChange={onChange}
                     placeholder={placeholder}
-                    disabled={isLoading || disabled}
+                    disabled={disabled || isLoading}
                 />
-                {isLoading && disabled}
+                {isLoading && <div className='loader' />}
             </div>
-            {error && <span className='input-error'>{error}</span>}
+
+            {error && <span className='ierror'>{error}</span>}
         </div>
     )
 }

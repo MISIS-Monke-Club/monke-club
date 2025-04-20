@@ -3,7 +3,7 @@ import classes from "./tag.module.scss"
 
 type TagProps = {
     text: string
-    variants?: "subject" | "type"
+    variants?: "subject" | "type" | "secondary"
 }
 
 export const Tag = ({ text, variants = "subject" }: TagProps) => {
