@@ -3,6 +3,8 @@ from user.models import UserBio
 
 from user.models import SocialNetwork
 
+from user.rating import add_user_activity
+
 
 class SocialNetworkUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,20 +36,25 @@ class UserBioSerializer(serializers.ModelSerializer):
         full_name = validated_data.pop('full_name', None)
 
         if full_name:
+
             first_name, *rest = full_name.strip().split(" ", 1)
             last_name = rest[0] if rest else ""
             user = instance.user
             user.first_name = first_name
             user.last_name = last_name
             user.save()
+            add_user_activity(user, "filled_full_name")
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
         if social_networks_data is not None:
             instance.social_networks.all().delete()
+
             for sn_data in social_networks_data:
                 SocialNetwork.objects.create(user=instance, **sn_data)
+
+            add_user_activity(instance.user, "added_socials")
 
         instance.save()
         return instance

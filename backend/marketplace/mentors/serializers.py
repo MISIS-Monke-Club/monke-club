@@ -9,6 +9,7 @@ from marketplace.serializers import ServiceSerializer, SubjectSerializer
 
 from user.serializers import SocialNetworkUserSerializer
 
+from user.rating import add_user_activity
 
 
 class GetListMentorSerializer(serializers.ModelSerializer):
@@ -73,7 +74,6 @@ class GetDetailMentorSerializer(serializers.ModelSerializer):
     def get_faculty(self, obj):
         return getattr(obj.user.bio, "faculty", None)
 
-
     def get_full_name(self, obj):
         return (obj.user.first_name + " " + obj.user.last_name).strip()
 
@@ -108,6 +108,9 @@ class MentorCreateSerializer(serializers.ModelSerializer):
         mentor = Mentor.objects.create(user=user, **validated_data)
         mentor.services.set(services)
         mentor.subjects.set(subjects)
+        if len(subjects) > 0:
+            add_user_activity(user, "linked_subjects")
+
         return mentor
 
     def update(self, instance, validated_data):

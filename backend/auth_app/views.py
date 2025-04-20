@@ -1,6 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
+from user.rating import add_user_activity
 
 
 class RegisterView(generics.CreateAPIView):
@@ -10,6 +11,8 @@ class RegisterView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        add_user_activity(user, "account_created")
+
         return Response({
             "message": "Registration successful",
             "user": UserSerializer(user).data

@@ -12,9 +12,6 @@ const envSchema = z.object({
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-    dotenv.config({ override: false })
-
-    envSchema.parse(process.env)
 
     return {
         plugins: [react()],
