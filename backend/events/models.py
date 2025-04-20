@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils.text import slugify
+from unidecode import unidecode
 
 class EventType(models.Model):
     type_name=models.CharField(default="Тип мероприятия не указан",verbose_name="Тип мероприятия",null=False)
@@ -15,8 +16,12 @@ class Event(models.Model):
     description = models.TextField(verbose_name="Описание")
     registration_link = models.URLField(blank=True, null=True, verbose_name="Ссылка на регистрацию")
     event_type = models.ForeignKey(EventType,default="Тип мероприятия не указан",on_delete=models.SET_DEFAULT)
-    image = models.ImageField(upload_to='events/', verbose_name="Фото")
+    image = models.ImageField(upload_to='events/', verbose_name="Фото",null=True)
     slug=models.SlugField(verbose_name="Символьный код", blank=True, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(unidecode(self.title))
+        super().save()
 
     def __str__(self):
         return self.title

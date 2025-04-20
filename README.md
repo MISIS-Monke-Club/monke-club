@@ -571,3 +571,216 @@ Host: localhost:3000
     }
 ]
 ```
+
+
+## Marketplace Applications
+
+### Get Filter Fields
+**Endpoint**: `GET /api/v1/marketplace/applications/filter-fields/`  
+**Response**:
+```json
+{
+    "fields": {
+        "subjects": "Предметы",
+        "services": "Тип задачи",
+        "year": "Курс",
+        "is_free": "Бесплатно"
+    }
+}
+```
+
+### Get Ordering Fields
+**Endpoint**: `GET /api/v1/marketplace/applications/ordering-fields/`  
+**Response**:
+```json
+{
+    "ordering_fields": [
+        "date_of_creation",
+        "price"
+    ]
+}
+```
+
+### List/Create Applications
+**Endpoint**: `GET/POST /api/v1/marketplace/applications/`  
+**GET Response**:
+```json
+[
+    {
+        "name": "Помощь с Python проектом",
+        "username": "tuntun_user1",
+        "year": 3,
+        "subjects": [],
+        "services": [],
+        "date_of_creation": "2025-04-20",
+        "price": "2500.00",
+        "slug": "pomoshch-s-python-proektom"
+    }
+]
+```
+
+**POST Request**:
+```json
+{
+    "id": 3,
+    "name": "Testname",
+    "slug": "testname",
+    "date_of_creation": "2025-04-19",
+    "description": "Testdesc",
+    "price": "1000.00",
+    "is_finished": false,
+    "year": 4,
+    "file": null,
+    "user": 1,
+    "executor_id": 2
+}
+```
+
+### Application Detail
+**Endpoint**: `GET/PUT/PATCH/DELETE /api/v1/marketplace/applications/{slug}/`  
+**GET Response**:
+```json
+{
+    "id": 1,
+    "services": [],
+    "subjects": [],
+    "name": "Помощь с Python проектом",
+    "slug": "pomoshch-s-python-proektom",
+    "date_of_creation": "2025-04-20",
+    "description": "Нужно помочь с проектом по Django",
+    "price": "2500.00",
+    "is_finished": false,
+    "year": 3,
+    "file": null,
+    "user": 1,
+    "executor_id": null
+}
+```
+
+**PUT/PATCH Request**:
+```json
+{
+    "id": 4,
+    "name": "test",
+    "slug": "test",
+    "date_of_creation": null,
+    "description": "esd",
+    "price": "1.00",
+    "is_finished": false,
+    "year": 1,
+    "file": null,
+    "user": 1,
+    "executor_id": null,
+    "services": [1],
+    "subjects": [1,2]
+}
+```
+
+---
+
+## Events
+
+### Get Event Types
+**Endpoint**: `GET /api/v1/events/event-types/`  
+**Response**: `[]`
+
+### Get Filter Fields
+**Endpoint**: `GET /api/v1/events/filter-fields/`  
+**Response**:
+```json
+{
+    "fields": {
+        "event_types": "Тип мероприятия",
+        "is_free": "Бесплатно",
+        "price_min": "Минимальная цена",
+        "price_max": "Максимальная цена",
+        "start_date": "Дата начала (ГГГГ-ММ-ДД)",
+        "end_date": "Дата окончания (ГГГГ-ММ-ДД)",
+        "location": "Местоположение"
+    }
+}
+```
+
+### Get Ordering Fields
+**Endpoint**: `GET /api/v1/events/ordering-fields/`  
+**Response**:
+```json
+{
+    "ordering_fields": [
+        "date",
+        "-date",
+        "price",
+        "-price"
+    ]
+}
+```
+
+### List/Create Events
+**Endpoint**: `GET/POST /api/v1/events/`  
+**GET Response**:
+```json
+[
+    {
+        "id": 1,
+        "title": "Testname",
+        "date": "2025-04-20T07:13:21Z",
+        "location": "Москва-Сити",
+        "image": "http://localhost:3000/media/events/2025-04-17_13_Dm27uXQ.44.54.jpg"
+    }
+]
+```
+
+**POST Request**:
+```json
+{
+    "title": "Test2",
+    "date": "2025-04-20T07:13:21Z",
+    "price": 52,
+    "location": "String",
+    "description": "string",
+    "registration_link": "https://testurl.com",
+    "event_type": 1,
+    "image": null
+}
+```
+
+### Event Detail
+**Endpoint**: `GET/PUT/PATCH/DELETE /api/v1/events/{slug}/`  
+**GET Response**:
+```json
+{
+    "id": 3,
+    "title": "weewe",
+    "date": "2025-04-20T07:22:46Z",
+    "price": 1000,
+    "location": "112112",
+    "description": "2121fwdedqd",
+    "registration_link": "https://altushkimoskvi.ru",
+    "event_type": {
+        "type_name": "Test"
+    },
+    "image": "http://localhost:3000/media/events/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2025-04-19_%D0%B2_22.07.42.png",
+    "slug": "weewe"
+}
+```
+
+**PUT/PATCH Request**:
+```json
+{
+    "title": "weewe",
+    "date": "2025-04-20T07:22:46Z",
+    "price": 1000,
+    "location": "112112",
+    "description": "2121fwdedqd",
+    "registration_link": "https://altushkimoskvi.ru",
+    "event_type": 1,
+    "image": "http://localhost:3000/media/events/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2025-04-19_%D0%B2_22.07.42.png"
+}
+```
+
+---
+
+### Notes:
+- Все даты в формате ISO 8601: `ГГГГ-ММ-ДД`
+- Поля `slug` генерируются автоматически на основе названия
+- Для файловых полей (`file`, `image`) ожидается URL после загрузки
