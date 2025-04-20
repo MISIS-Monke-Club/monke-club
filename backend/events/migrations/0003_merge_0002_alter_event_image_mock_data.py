@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("events", "0002_alter_event_image"),
-        ("events", "mock_data"),
     ]
 
     operations = []

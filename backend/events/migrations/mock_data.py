@@ -60,7 +60,7 @@ def create_mock_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events', '0001_initial'),  # замените при необходимости
+        ('events', '0003_merge_0002_alter_event_image_mock_data'),  # замените при необходимости
     ]
 
     operations = [
