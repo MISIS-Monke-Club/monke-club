@@ -23,7 +23,7 @@ export const fullRequestDTOschema = z.object({
     is_finished: z.boolean(),
     file: z.string().url().nullable(),
     user: z.number(),
-    executor_id: z.number(),
+    executor_id: z.number().nullable(),
 })
 
 export type FullRequestDTO = z.infer<typeof fullRequestDTOschema>
@@ -41,7 +41,7 @@ export type FullRequestModel = {
     isFinished: boolean
     file: string | null
     user: number
-    executorId: number
+    executorId: number | null
 }
 
 export function fromFullRequestDTO(dto: FullRequestDTO): FullRequestModel {

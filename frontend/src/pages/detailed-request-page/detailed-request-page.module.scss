@@ -1,6 +1,6 @@
 .div {
     padding: 30px;
-    border: 2px solid black;
     border-radius: 7px;
-    color: black;
+    color: var(--color-main-text);
+    background-color: var(--color-background-alt);
 }
