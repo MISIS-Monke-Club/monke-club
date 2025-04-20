@@ -25,8 +25,9 @@ jobs:
               cd /root
               git clone https://Topando:${{ secrets.GH_DEPLOY_TOKEN }}@github.com/MISIS-Monke-Club/monke-club.git
             fi
-
+            
             cd /root/monke-club
+            git config pull.rebase false
             git pull origin develop
             docker-compose -f docker-compose.prod.yaml pull
             docker-compose -f docker-compose.prod.yaml up -d --build
