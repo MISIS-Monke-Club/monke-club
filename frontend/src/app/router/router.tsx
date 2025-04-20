@@ -7,6 +7,9 @@ import { MentorsPage } from "@pages/mentors/mentors"
 import { MentorPage } from "@pages/mentor-page/mentor-page"
 import { RequestsPage } from "@pages/requests-page"
 import { RequestDetail } from "@pages/detailed-request-page"
+import { FirstMentors } from "@pages/first-mentors-page"
+import { VacationPage } from "@pages/vacation-page"
+import { EventsPage } from "@pages/events-page"
 
 export const router = createBrowserRouter(
     [
@@ -44,6 +47,10 @@ export const router = createBrowserRouter(
                             ),
                             children: [
                                 {
+                                    path: "",
+                                    element: <FirstMentors />,
+                                },
+                                {
                                     path: "mentors",
                                     element: <MentorsPage />,
                                 },
@@ -60,6 +67,14 @@ export const router = createBrowserRouter(
                         {
                             path: "request/:slug",
                             element: <RequestDetail />,
+                        },
+                        {
+                            path: "vacations",
+                            element: <VacationPage />,
+                        },
+                        {
+                            path: "events",
+                            element: <EventsPage />,
                         },
                         {
                             path: "share-items",

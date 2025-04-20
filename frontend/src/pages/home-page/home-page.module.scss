@@ -1,34 +1,67 @@
-.landingSection {
+.title {
+    margin-bottom: 28px;
+
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 44px;
+    color: black;
+}
+
+.largeCard {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    align-items: start;
+    gap: 16px;
 
-    .main {
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
-        align-items: center;
-        justify-content: space-between;
-    }
+    margin-bottom: 20px;
+    padding: 20px 20px 40px;
+    border-radius: 24px;
 
-    .header {
-        max-width: 60%;
-    }
+    background-color: var(--color-background-alt);
+}
 
-    .title {
-        font-size: 3rem;
-        font-weight: 800;
-    }
+.cardTitle {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 44px;
+    color: black;
+}
 
-    .subTitle {
-        font-size: 1.5rem;
-        color: var(--muted-foreground);
-    }
+.desc {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: black;
+}
 
-    .previewImage {
-        width: 100%;
-        max-width: 350px;
-        border-radius: 16px;
-    }
+.button {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 24px;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: white;
+
+    background-color: var(--color-accent);
+}
+
+.wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.smCard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 20px 20px 40px;
+    border-radius: 24px;
+
+    background-color: var(--color-background-alt);
 }
