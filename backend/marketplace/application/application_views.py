@@ -24,6 +24,7 @@ from rest_framework import filters as filters
 from .application_filters import ApplicationFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,AllowAny
 
 
 class ApplicationListCreateView(
@@ -46,6 +47,11 @@ class ApplicationListCreateView(
         "services__name",
     ]
 
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [IsAuthenticated()]
+        return [AllowAny()]
+
     def get_serializer_class(self):
         if self.request.method == "POST":
             return ApplicationCreateSerializer
@@ -67,6 +73,12 @@ class ApplicationRUDView(
     queryset = Application.objects.all()
     serializer_class = ApplicationsSerializer
     lookup_field = "slug"
+    
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -82,6 +94,8 @@ class ApplicationRUDView(
 
 class ApplicationFilterFieldsView(APIView):
 
+    permission_classes=[AllowAny]
+
     def get(self, request, *args, **kwargs):
         return Response({
             "fields": {
@@ -94,6 +108,7 @@ class ApplicationFilterFieldsView(APIView):
 
 
 class ApplicationOrderingFieldsView(APIView):
+    permission_classes=[AllowAny]
 
     def get(self, request, *args, **kwargs):
         return Response({

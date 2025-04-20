@@ -7,6 +7,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .filters import EventFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,AllowAny
+
+
 
 class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
     queryset = Event.objects.all()
@@ -22,9 +25,16 @@ class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
     'event_type__type_name',
     ]
 
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [IsAuthenticated()]
+        return [AllowAny()]
+    
+
+
     def get_serializer_class(self):
         if self.request.method == "POST":
-            return EventCreateUpdateSerializer
+            return EventCreateUpdateSerializer 
         return EventListSerializer
     
     def get(self, request, *args, **kwargs):
@@ -36,6 +46,11 @@ class EventListCreateView(GenericAPIView, ListModelMixin, CreateModelMixin):
 
 class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
     queryset = Event.objects.all()
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_serializer_class(self):
         if self.request.method == "PUT":
@@ -56,6 +71,7 @@ class EventDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, Dest
         return self.destroy(request, slug=slug, *args, **kwargs)
     
 class EventFilterFieldsView(APIView):
+    parser_classes=[AllowAny]
     def get(self, request, *args, **kwargs):
         return Response({
             "fields": {
@@ -70,6 +86,7 @@ class EventFilterFieldsView(APIView):
         })
 
 class EventOrderingFieldsView(APIView):
+    permission_classes=[AllowAny]
     def get(self, request, *args, **kwargs):
         return Response({
             "ordering_fields": [
@@ -81,6 +98,7 @@ class EventOrderingFieldsView(APIView):
         })
 
 class EventTypeListView(GenericAPIView, ListModelMixin):
+    permission_classes=[AllowAny]
     queryset = EventType.objects.all()
     serializer_class = EventTypeSerializer
     pagination_class = None
