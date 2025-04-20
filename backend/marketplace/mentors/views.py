@@ -1,4 +1,7 @@
-from rest_framework import viewsets, filters, permissions
+
+
+from rest_framework import viewsets, filters, permissions, mixins
+
 from django.db.models import F
 
 
@@ -12,19 +15,22 @@ from marketplace.mentors.serializers import (
 )
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from user.mixins import IsOwnerMixin
 from marketplace.mentors.filters import *
 
 from marketplace.mentors.handler import GeFiltersEndpoint
 
-class MentorViewSet(viewsets.ModelViewSet):
-    queryset = Mentor.objects.all()
-    lookup_field = "user__username"
-    filter_backends = (
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
+
+class MentorViewSet(mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
+                    mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
+                        GenericViewSet):
+    queryset = Mentor.objects.all().distinct()
+    lookup_field = 'user__username'
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter,)
     filterset_class = MentorFilters
     ordering_fields = ["count_successful_transactions", "rating"]
     ordering = ["-count_successful_transactions"]
@@ -37,9 +43,11 @@ class MentorViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Mentor.objects.select_related("user__bio").annotate(
-            rating=F("user__bio__rating")
-        )
+
+        return Mentor.objects.select_related('user__bio').annotate(
+            rating=F('user__bio__rating')
+        ).distinct()
+
 
     def get_serializer_class(self):
         if self.action == "list":

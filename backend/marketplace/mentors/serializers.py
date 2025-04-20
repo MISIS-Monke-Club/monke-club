@@ -49,6 +49,9 @@ class GetDetailMentorSerializer(serializers.ModelSerializer):
     )
     services = ServiceSerializer(many=True)
     subjects = SubjectSerializer(many=True)
+    count_successful_transactions = serializers.SerializerMethodField(read_only=True)
+    course = serializers.SerializerMethodField(read_only=True)
+    faculty = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Mentor
@@ -62,10 +65,23 @@ class GetDetailMentorSerializer(serializers.ModelSerializer):
             "subjects",
             "count_successful_transactions",
             "social_network",
+            "course",
+            "faculty"
+
         )
+
+    def get_faculty(self, obj):
+        return getattr(obj.user.bio, "faculty", None)
+
 
     def get_full_name(self, obj):
         return (obj.user.first_name + " " + obj.user.last_name).strip()
+
+    def get_count_successful_transactions(self, obj):
+        return obj.count_successful_transactions
+
+    def get_course(self, obj):
+        return getattr(obj.user.bio, "course", None)
 
 
 class MentorCreateSerializer(serializers.ModelSerializer):

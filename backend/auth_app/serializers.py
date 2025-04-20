@@ -1,98 +1,47 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-User = get_user_model()
-
-
-class TunTunTunSahurSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    username = serializers.CharField()
-    email = serializers.EmailField()
-    is_active = serializers.BooleanField(read_only=True)
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
-class TunTunTunSahurRegisterSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    email = serializers.EmailField()
+class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
 
-    def validate_username(self, value):
-        if User.objects.filter(username=value).exists():
-            raise serializers.ValidationError(
-                "Пользователь с таким username уже существует"
-            )
-        return value
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'password2')
 
-    def validate_email(self, value):
-        if User.objects.filter(email=value).exists():
-            raise serializers.ValidationError(
-                "Пользователь с таким email уже существует"
-            )
-        return value
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError("Passwords do not match.")
+        return data
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data["username"],
-            email=validated_data["email"],
-            password=validated_data["password"],
-        )
+        validated_data.pop('password2')
+        user = User.objects.create_user(**validated_data)
         return user
 
-    def to_representation(self, instance):
-        return TunTunTunSahurSerializer(instance).data
 
-
-class LoginResponseSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    username = serializers.CharField()
-    email = serializers.EmailField()
-    is_active = serializers.BooleanField(read_only=True)
-
-
-class TunTunTunLogin(TokenObtainPairSerializer):
+class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token["username"] = user.username
-        return token
-
-    def validate(self, attrs):
-        username_or_email = attrs.get("username")
-        password = attrs.get("password")
-
-        user = None
-        if "@" in username_or_email:
-            try:
-                user = User.objects.get(email=username_or_email)
-            except User.DoesNotExist:
-                raise serializers.ValidationError(
-                    {"username": "Пользователь с таким email не найден."}
-                )
-        else:
-            try:
-                user = User.objects.get(username=username_or_email)
-            except User.DoesNotExist:
-                raise serializers.ValidationError(
-                    {"username": "Пользователь с таким username не найден."}
-                )
-
-        if not user.check_password(password):
-            raise serializers.ValidationError(
-                {
-                    "username": "Неверные учетные данные.",
-                    "password": "Неверные учетные данные.",
-                }
-            )
-
-        refresh = self.get_token(user)
-        data = {
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-            "user": LoginResponseSerializer(user).data,
+    def validate(self, data):
+        user = authenticate(
+            username=data.get('username'),
+            password=data.get('password')
+        )
+        if not user:
+            raise serializers.ValidationError("Invalid credentials.")
+        refresh = RefreshToken.for_user(user)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
         }
 
-        return data
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')

@@ -1,14 +1,10 @@
-from django.urls import re_path
-from .views import (
-    BobritoBanditoDetail,
-    CreateBobritoBandito,
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserBioViewSet
+
+router = DefaultRouter()
+router.register(r'', UserBioViewSet, basename='profile')
 
 urlpatterns = [
-    re_path(r"^users/?$", CreateBobritoBandito.as_view(), name="user-create"),
-    re_path(
-        r"^users/(?P<username>[\w.@+-]+)/?$",
-        BobritoBanditoDetail.as_view(),
-        name="user-detail",
-    ),
+    path('', include(router.urls)),
 ]
