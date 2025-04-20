@@ -7,7 +7,19 @@ type RatingProps = {
     component?: ReactNode
 }
 
-export function Rating({ rating, component = "+" }: RatingProps) {
+export function Rating({
+    rating,
+    component = (
+        <img
+            className='class-for-img'
+            src='/star-icon.svg'
+            alt='star icon'
+            width='25'
+            height='16'
+            loading='lazy'
+        />
+    ),
+}: RatingProps) {
     if (rating < 0.5) {
         return (
             <div className={classes.value}>

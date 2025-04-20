@@ -6,7 +6,7 @@ type TagProps = React.ComponentProps<"span"> & {
 }
 
 export const Tag = ({ variants = "subject", className, ...rest }: TagProps) => {
-    const combinedClassNames = clsx(classes.tag, classes[variants])
+    const combinedClassNames = clsx(classes.tag, classes[variants], className)
 
     return <span className={combinedClassNames} {...rest} />
 }

@@ -1,12 +1,10 @@
 .wrapper {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 4px;
     align-items: center;
-
-    width: 100%;
 }
 
 .value {
-    font-size: toRem(12);
+    font-size: toRem(18);
 }

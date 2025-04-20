@@ -1,5 +1,151 @@
+.person {
+    width: 100%;
+}
+
 .info {
     display: flex;
     flex-direction: row;
+    gap: toRem(20);
+    align-items: start;
+    justify-content: start;
+
+    width: 100%;
+    margin-bottom: toRem(32);
+
+    .image {
+        border-radius: 28px;
+    }
+
+    .main {
+        width: 100%;
+
+        .finishedTasks {
+            margin-bottom: toRem(60);
+
+            .value {
+                font-size: toRem(28);
+                color: var(--color-text-alt);
+            }
+
+            .bg {
+                position: absolute;
+                z-index: -1;
+                top: 128px;
+                right: 0;
+                left: 0;
+
+                height: 85px;
+
+                background-color: var(--color-accent);
+            }
+        }
+
+        .person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                gap: toRem(16);
+                align-items: start;
+
+                margin-bottom: toRem(36);
+
+                .about {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    width: 100%;
+
+                    .text {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        .name {
+                            font-size: toRem(36);
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .university {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: start;
+
+                    .tag {
+                        font-size: 16px;
+                        color: var(--color-main-text);
+                        background-color: var(--color-background-alt);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.additionInfo {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(32);
     align-items: center;
+
+    width: 100%;
+
+    .tags {
+        display: flex;
+        flex-direction: row;
+        gap: toRem(20);
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+
+        .tagGroup {
+            display: flex;
+            flex-direction: column;
+            gap: toRem(16);
+            align-items: start;
+
+            width: 100%;
+
+            .title {
+                font-size: toRem(28);
+                font-weight: 600;
+            }
+
+            .list {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: start;
+            }
+        }
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+        gap: toRem(24);
+        align-items: start;
+        align-self: flex-start;
+
+        margin-bottom: toRem(60);
+
+        /* stylelint-disable-next-line no-descending-specificity */
+        .title {
+            font-size: toRem(28);
+            font-weight: 600;
+        }
+    }
 }
