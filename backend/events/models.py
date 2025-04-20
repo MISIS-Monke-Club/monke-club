@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from unidecode import unidecode
+from django.contrib.auth import get_user_model
+
 
 class EventType(models.Model):
     type_name=models.CharField(default="Тип мероприятия не указан",verbose_name="Тип мероприятия",null=False)
@@ -8,7 +10,7 @@ class EventType(models.Model):
         return self.type_name
 
 class Event(models.Model):
-
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name="Создатель", related_name="events",null=True)
     title = models.CharField(max_length=255, verbose_name="Название",unique=True)
     date = models.DateTimeField(verbose_name="Дата и время")
     price = models.IntegerField(null=True, verbose_name="Стоимость посещения")
