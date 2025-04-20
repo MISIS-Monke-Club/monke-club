@@ -315,7 +315,7 @@ Content-Type: application/json
 |               |         | `count_successful_transactions` — по возрастанию успешных сделок         |
 |               |         | `-count_successful_transactions` — по убыванию успешных сделок *(по умолчанию)* |
 |               |         | `rating` — по возрастанию рейтинга                                      |
-|               |         | `-rating` — по убыванию рейтинга                                        |
+|               |         | `-rating` — по убыванию рейтинга  <br/>http://localhost:3000/api/v1/marketplace/mentors/ordering-fields/                                      |
 | Другие фильтры| —       | Зависит от реализации `MentorFilters`. См. `GET /api/v1/marketplace/mentors/filters/` |
 
 ---
