@@ -7,7 +7,7 @@ class Vacancy(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название")
     slug = models.SlugField(max_length=255, blank=True, unique=True, verbose_name="Слаг")
     description = models.TextField(verbose_name="Описание")
-    stack = models.ManyToManyField('Stack', related_name='vacancies', null=True, blank=True, verbose_name="Стек разработки")
+    stack = models.ManyToManyField('Stack', related_name='vacancies',blank=True, verbose_name="Стек разработки")
     data_created = models.DateTimeField(auto_now_add=True)
     data_end = models.DateField(null=True, blank=True, verbose_name="Дата окончания")
     price = models.PositiveIntegerField(null=True, blank=True, verbose_name="Цена")
